@@ -44,7 +44,7 @@ const TIMELINE = [
     logo: peptipediaLogo,
     role: "Founder",
     when: "Now · Pre-launch",
-    note: "Plain-language peptide encyclopedia at peptipedia.com — the education companion to Motionless Labs, kept deliberately separate from anything for sale.",
+    note: "Plain-language peptide encyclopedia at peptipedia.xyz — the education companion to Motionless Labs, kept deliberately separate from anything for sale.",
   },
   {
     co: "Citi Bank N.A.",

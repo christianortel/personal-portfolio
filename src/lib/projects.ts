@@ -74,7 +74,7 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     n: "03",
     year: "2026 · Pre-launch",
-    client: "peptipedia.com · Founder",
+    client: "peptipedia.xyz · Founder",
     title: "Peptipedia — a plain-language peptide encyclopedia",
     blurb:
       "The education arm of Motionless Labs, kept deliberately separate from anything for sale: reference pages and research summaries on peptides, written so a non-scientist can follow the evidence.",
@@ -84,7 +84,7 @@ export const FEATURED_PROJECTS: Project[] = [
       { k: "Founder", v: "with Motionless Labs" },
     ],
     tag: "Venture · Education",
-    href: "https://peptipedia.com",
+    href: "https://peptipedia.xyz",
     fun: "Wikipedia energy, peptide subject matter.",
   },
   {
