@@ -19,6 +19,10 @@ import nmLogo from "@/assets/logos/northwestern-mutual.png";
 import brLogo from "@/assets/logos/banana-republic.png";
 import tallownaiseLogo from "@/assets/logos/tallownaise.png";
 import motionlessLogo from "@/assets/logos/motionless.png";
+import peptipediaLogo from "@/assets/logos/peptipedia.png";
+
+/** Volunteering & community — add entries here and the section renders itself. */
+const VOLUNTEERING: { org: string; role: string; when: string; note: string }[] = [];
 
 const TIMELINE = [
   {
@@ -34,6 +38,13 @@ const TIMELINE = [
     role: "Founder",
     when: "Now · Pre-launch",
     note: "Members-only, research-use-only peptide catalog with a third-party COA linked to every batch — gated catalog access, lot documentation, and order tooling at motionlesslabs.com.",
+  },
+  {
+    co: "Peptipedia",
+    logo: peptipediaLogo,
+    role: "Founder",
+    when: "Now · Pre-launch",
+    note: "Plain-language peptide encyclopedia at peptipedia.com — the education companion to Motionless Labs, kept deliberately separate from anything for sale.",
   },
   {
     co: "Citi Bank N.A.",
@@ -323,6 +334,31 @@ function AboutPage() {
             ))}
           </ol>
         </section>
+
+        {/* Volunteering & community — appears once VOLUNTEERING has entries */}
+        {VOLUNTEERING.length > 0 && (
+          <section className="mt-24">
+            <h2 className="mb-10 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              [ Volunteering & community ]
+            </h2>
+            <ol className="space-y-4">
+              {VOLUNTEERING.map((v) => (
+                <li
+                  key={v.org + v.when}
+                  onMouseMove={spotlightMove}
+                  className="spotlight-card grid grid-cols-1 gap-4 rounded-3xl border border-line bg-card/20 p-6 sm:grid-cols-[1fr_2fr] sm:gap-12 sm:p-8"
+                >
+                  <div>
+                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">{v.org}</div>
+                    <div className="mt-2 text-sm text-muted-foreground">{v.role}</div>
+                    <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">{v.when}</div>
+                  </div>
+                  <p className="self-center text-sm leading-relaxed text-muted-foreground sm:text-base">{v.note}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
 
         {/* Skills */}
         <section className="mt-24">

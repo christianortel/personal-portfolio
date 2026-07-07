@@ -380,7 +380,7 @@ function Index() {
               I'm Christian — a Senior Data Analyst with a background in
               financial services, risk, and automation. I build practical things
               with SQL, Python, AI/RAG, and clean data workflows — from
-              enterprise risk reporting at Citi to two companies of my own
+              enterprise risk reporting at Citi to a family of ventures
               heading to market.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
@@ -509,13 +509,13 @@ function Index() {
                 <DecryptText text="[ 02 · Selected work ]" />
               </p>
               <h2 data-blur className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl">
-                Two ventures &
+                Four ventures &
                 <br />
                 <span className="italic text-signal">shipped</span> side projects.
               </h2>
             </div>
             <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              06 / 26
+              07 / 26
             </span>
           </div>
 
@@ -655,11 +655,13 @@ function Index() {
                 WorldStar HipHop, and TD Bank. BS in Big Data &amp; Business Analytics,
                 concentration in Cybersecurity, from Suffolk University — Dean's List,
                 Trustee Scholarship, Transfer Excellence Award. Right now I'm
-                taking two companies of my own to market — <span className="italic text-foreground">Tallownaise</span>,
-                real mayo made with grass-fed beef tallow, and{" "}
+                taking my own ventures to market — <span className="italic text-foreground">Tallownaise</span>,
+                real mayo made with grass-fed beef tallow;{" "}
                 <span className="italic text-foreground">Motionless Labs</span>, a
-                research-peptide catalog with a verified COA on every batch — on
-                top of a shelf of shipped side projects like toxinmap.
+                research-peptide catalog with a verified COA on every batch; and{" "}
+                <span className="italic text-foreground">Peptipedia</span>, its
+                plain-language education arm — on top of a shelf of shipped side
+                projects like toxinmap.
               </p>
               <div data-fade className="flex flex-wrap items-center gap-4">
                 <a
@@ -690,7 +692,7 @@ function Index() {
               />
               <ul data-fade className="space-y-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 {[
-                  ["Now", "Launching Tallownaise & Motionless Labs · open to data roles"],
+                  ["Now", "Launching Tallownaise, Motionless Labs & Peptipedia · open to data roles"],
                   ["Prev", "Citi · JPMorgan · WorldStar · iDeFi"],
                   ["Edu", "Suffolk · BS Big Data & Analytics"],
                   ["Certs", "Python PCAP · Google Data · mThree"],

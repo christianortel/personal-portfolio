@@ -26,7 +26,15 @@ export interface RepoProject {
   blurb: string;
   lang: string;
   href: string;
+  category: "AI & LLM" | "Data & prediction" | "Web3 & smart contracts" | "Games & extensions";
 }
+
+export const REPO_CATEGORIES = [
+  "AI & LLM",
+  "Data & prediction",
+  "Web3 & smart contracts",
+  "Games & extensions",
+] as const;
 
 export const FEATURED_PROJECTS: Project[] = [
   {
@@ -66,6 +74,22 @@ export const FEATURED_PROJECTS: Project[] = [
   {
     n: "03",
     year: "2026 · Pre-launch",
+    client: "peptipedia.com · Founder",
+    title: "Peptipedia — a plain-language peptide encyclopedia",
+    blurb:
+      "The education arm of Motionless Labs, kept deliberately separate from anything for sale: reference pages and research summaries on peptides, written so a non-scientist can follow the evidence.",
+    metrics: [
+      { k: "Reference", v: "plain-language entries" },
+      { k: "Separate", v: "education ≠ store" },
+      { k: "Founder", v: "with Motionless Labs" },
+    ],
+    tag: "Venture · Education",
+    href: "https://peptipedia.com",
+    fun: "Wikipedia energy, peptide subject matter.",
+  },
+  {
+    n: "04",
+    year: "2026 · Pre-launch",
     client: "toxinmap · Founder",
     title: "3D globe for U.S. toxic releases & PFAS exposure context",
     blurb:
@@ -80,7 +104,7 @@ export const FEATURED_PROJECTS: Project[] = [
     fun: "Find out what's in your backyard. Sorry in advance.",
   },
   {
-    n: "04",
+    n: "05",
     year: "2026",
     client: "rockstar-games-sales",
     title: "Interactive atlas of Rockstar Games releases & sales",
@@ -96,7 +120,7 @@ export const FEATURED_PROJECTS: Project[] = [
     fun: "Your GTA childhood, quantified.",
   },
   {
-    n: "05",
+    n: "06",
     year: "2026",
     client: "marketing-analytics-suite",
     title: "Multi-channel marketing intelligence (ROAS / CPA)",
@@ -112,7 +136,7 @@ export const FEATURED_PROJECTS: Project[] = [
     fun: "Finds out which ad dollars are lying to you.",
   },
   {
-    n: "06",
+    n: "07",
     year: "2026",
     client: "chromehearts-price-tracker",
     title: "Resale price tracker across Grailed, StockX, Poshmark, eBay, Rinkan",
@@ -129,78 +153,129 @@ export const FEATURED_PROJECTS: Project[] = [
   },
 ];
 
-/** Lighter-weight repos pulled from github.com/christianortel — shown on /projects. */
+/** Full public-repo catalog from github.com/christianortel (original work, no forks). */
 export const MORE_PROJECTS: RepoProject[] = [
+  // AI & LLM
   {
-    name: "UFC-FightPredictor",
-    blurb: "End-to-end data science app predicting UFC fight outcomes.",
-    lang: "Python",
-    href: "https://github.com/christianortel/UFC-FightPredictor",
-  },
-  {
-    name: "premier-league-predictor",
-    blurb: "Web scraping + statistical modeling for football match analysis.",
-    lang: "Python",
-    href: "https://github.com/christianortel/premier-league-predictor",
-  },
-  {
-    name: "bionicreader-google-extension",
-    blurb: "Privacy-first focus-reading Chrome extension for calmer web reading.",
-    lang: "JavaScript",
-    href: "https://github.com/christianortel/bionicreader-google-extension",
-  },
-  {
-    name: "flappy-bird",
-    blurb: "Polished browser remake of Flappy Bird as a static web app.",
-    lang: "JavaScript",
-    href: "https://github.com/christianortel/flappy-bird",
-  },
-  {
-    name: "interactivebuddy-v2",
-    blurb: "Remake of the original Newgrounds Interactive Buddy flash game.",
-    lang: "JavaScript",
-    href: "https://github.com/christianortel/interactivebuddy-v2",
-  },
-  {
-    name: "coldplunge-sauna-redlight-tracker",
-    blurb: "Recovery-protocol tracker for cold plunge, sauna, and red-light sessions.",
-    lang: "TypeScript",
-    href: "https://github.com/christianortel/coldplunge-sauna-redlight-tracker",
-  },
-  {
-    name: "personal-portfolio",
-    blurb: "This site — TanStack Start, React 19, GSAP, and a physics-based 3D lanyard.",
-    lang: "TypeScript",
-    href: "https://github.com/christianortel/personal-portfolio",
-  },
-  {
-    name: "OpenEmoji-NFT",
-    blurb: "Open-source emoji NFT collection — Solidity smart contracts.",
-    lang: "Solidity",
-    href: "https://github.com/christianortel/OpenEmoji-NFT",
-  },
-  {
-    name: "RealEstateDemo",
-    blurb: "Demo for decentralizing property sales as NFTs on EVM chains.",
-    lang: "Solidity",
-    href: "https://github.com/christianortel/RealEstateDemo",
-  },
-  {
-    name: "GreedyBot",
-    blurb: "Crypto trading bot v1.1 — signals and automated execution.",
-    lang: "JavaScript",
-    href: "https://github.com/christianortel/GreedyBot",
+    name: "livestream-agent-dazzle",
+    blurb: "An AI agent experiment for live-stream interaction.",
+    lang: "HTML",
+    href: "https://github.com/christianortel/livestream-agent-dazzle",
+    category: "AI & LLM",
   },
   {
     name: "ChatGPT-Whatsapp",
     blurb: "WhatsApp chatbot bridging conversations to GPT on the go.",
     lang: "JavaScript",
     href: "https://github.com/christianortel/ChatGPT-Whatsapp",
+    category: "AI & LLM",
   },
   {
     name: "discord-voice-bot",
     blurb: "Voice-enabled Discord bot experiments.",
     lang: "JavaScript",
     href: "https://github.com/christianortel/discord-voice-bot",
+    category: "AI & LLM",
+  },
+  {
+    name: "chatgpt3gametest",
+    blurb: "A mini game built entirely by prompting GPT-3 — early LLM tinkering.",
+    lang: "JavaScript",
+    href: "https://github.com/christianortel/chatgpt3gametest",
+    category: "AI & LLM",
+  },
+  // Data & prediction
+  {
+    name: "UFC-FightPredictor",
+    blurb: "End-to-end data science app predicting UFC fight outcomes.",
+    lang: "Python",
+    href: "https://github.com/christianortel/UFC-FightPredictor",
+    category: "Data & prediction",
+  },
+  {
+    name: "premier-league-predictor",
+    blurb: "Web scraping + statistical modeling for football match analysis.",
+    lang: "Python",
+    href: "https://github.com/christianortel/premier-league-predictor",
+    category: "Data & prediction",
+  },
+  {
+    name: "toxins-dashboard",
+    blurb: "Companion dashboard to toxinmap for environmental data slices.",
+    lang: "TypeScript",
+    href: "https://github.com/christianortel/toxins-dashboard",
+    category: "Data & prediction",
+  },
+  {
+    name: "coldplunge-sauna-redlight-tracker",
+    blurb: "Recovery-protocol tracker for cold plunge, sauna, and red-light sessions.",
+    lang: "TypeScript",
+    href: "https://github.com/christianortel/coldplunge-sauna-redlight-tracker",
+    category: "Data & prediction",
+  },
+  // Web3 & smart contracts
+  {
+    name: "OpenEmoji-NFT",
+    blurb: "Open-source emoji NFT collection — Solidity smart contracts.",
+    lang: "Solidity",
+    href: "https://github.com/christianortel/OpenEmoji-NFT",
+    category: "Web3 & smart contracts",
+  },
+  {
+    name: "RealEstateDemo",
+    blurb: "Demo for decentralizing property sales as NFTs on EVM chains.",
+    lang: "Solidity",
+    href: "https://github.com/christianortel/RealEstateDemo",
+    category: "Web3 & smart contracts",
+  },
+  {
+    name: "Hotel-Room-NFT-v1",
+    blurb: "Tokenized hotel-room access experiment in Solidity.",
+    lang: "Solidity",
+    href: "https://github.com/christianortel/Hotel-Room-NFT-v1",
+    category: "Web3 & smart contracts",
+  },
+  {
+    name: "GreedyBot",
+    blurb: "Crypto trading bot v1.1 — signals and automated execution.",
+    lang: "JavaScript",
+    href: "https://github.com/christianortel/GreedyBot",
+    category: "Web3 & smart contracts",
+  },
+  {
+    name: "mytestnetprojects",
+    blurb: "A grab bag of local EVM testnet experiments.",
+    lang: "Solidity",
+    href: "https://github.com/christianortel/mytestnetprojects",
+    category: "Web3 & smart contracts",
+  },
+  // Games & extensions
+  {
+    name: "flappy-bird",
+    blurb: "Polished browser remake of Flappy Bird as a static web app.",
+    lang: "JavaScript",
+    href: "https://github.com/christianortel/flappy-bird",
+    category: "Games & extensions",
+  },
+  {
+    name: "interactivebuddy-v2",
+    blurb: "Remake of the original Newgrounds Interactive Buddy flash game.",
+    lang: "JavaScript",
+    href: "https://github.com/christianortel/interactivebuddy-v2",
+    category: "Games & extensions",
+  },
+  {
+    name: "bionicreader-google-extension",
+    blurb: "Privacy-first focus-reading Chrome extension for calmer web reading.",
+    lang: "JavaScript",
+    href: "https://github.com/christianortel/bionicreader-google-extension",
+    category: "Games & extensions",
+  },
+  {
+    name: "personal-portfolio",
+    blurb: "This site — TanStack Start, React 19, GSAP, and a physics-based 3D lanyard.",
+    lang: "TypeScript",
+    href: "https://github.com/christianortel/personal-portfolio",
+    category: "Games & extensions",
   },
 ];

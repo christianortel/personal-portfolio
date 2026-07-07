@@ -6,7 +6,7 @@ import { DecryptText } from "@/components/fx/DecryptText";
 import { spotlightMove } from "@/lib/spotlight";
 import { tiltMove, tiltReset } from "@/lib/tilt";
 import { SITE_URL, ogImage } from "@/lib/site";
-import { FEATURED_PROJECTS, MORE_PROJECTS } from "@/lib/projects";
+import { FEATURED_PROJECTS, MORE_PROJECTS, REPO_CATEGORIES } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -69,15 +69,15 @@ function ProjectsPage() {
           <DecryptText text="[ Work ]" />
         </p>
         <h1 className="font-display text-4xl font-light leading-[1.02] tracking-tight sm:text-7xl">
-          Two ventures &
+          Ventures &
           <br />
-          <span className="italic text-signal">shipped</span> side projects.
+          <span className="italic text-signal">everything</span> I've shipped.
         </h1>
         <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Up top: the two companies I'm taking to market. After them, the side
-          projects with the most moving parts — the enterprise analytics work
-          lives with my experience and in the resume. Below it all, the wider
-          GitHub shelf.
+          Up top: the ventures I'm taking to market — Tallownaise, Motionless
+          Labs, Peptipedia, and toxinmap. After them, the side projects with the
+          most moving parts, then the full GitHub catalog by category. The
+          enterprise analytics work lives with my experience and in the resume.
         </p>
 
         {/* Featured */}
@@ -156,8 +156,13 @@ function ProjectsPage() {
               All repos →
             </a>
           </div>
+          {REPO_CATEGORIES.map((cat) => (
+          <div key={cat} className="mb-14">
+          <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
+            <DecryptText text={`[ ${cat} ]`} />
+          </h3>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {MORE_PROJECTS.map((r) => (
+            {MORE_PROJECTS.filter((r) => r.category === cat).map((r) => (
               <a
                 key={r.name}
                 href={r.href}
@@ -183,6 +188,8 @@ function ProjectsPage() {
               </a>
             ))}
           </div>
+          </div>
+          ))}
         </section>
       </main>
 
