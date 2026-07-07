@@ -17,8 +17,10 @@ Editorial "warm paper" design with a physics-based 3D lanyard hero. Launching at
   `prefers-reduced-motion` aware.
 - **⌘K command palette** (cmdk) — jump to pages, copy email, download resume.
 - **Real content** — experience with quantified outcomes (Citi ICRM RAG: 60%→95%
-  AI-SQL accuracy), ventures ([Tallownaise](https://tallownaise.com),
-  [Motionless Labs](https://motionlesslabs.com)), and 18+ GitHub projects.
+  AI-SQL accuracy), four ventures ([Tallownaise](https://tallownaise.com),
+  [Motionless Labs](https://motionlesslabs.com), Peptipedia, toxinmap), and the
+  full original-repo catalog grouped by category (AI & LLM, data & prediction,
+  Web3, games & extensions).
 - **SEO/a11y** — per-route meta + canonical + branded OG images, JSON-LD
   (Person/WebSite/Breadcrumb), sitemap + robots, skip link, focus rings.
 
@@ -34,6 +36,7 @@ deployed on Cloudflare Workers (nitro) via Lovable.
 npm install
 npm run dev        # http://localhost:8080 (port pinned by Lovable config)
 npm run build      # production build (Cloudflare Workers output)
+npm test           # vitest — data-invariant tests for projects/site config
 npx tsc --noEmit   # typecheck
 ```
 

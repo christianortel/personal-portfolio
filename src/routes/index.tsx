@@ -696,7 +696,7 @@ function Index() {
                   ["Prev", "Citi · JPMorgan · WorldStar · iDeFi"],
                   ["Edu", "Suffolk · BS Big Data & Analytics"],
                   ["Certs", "Python PCAP · Google Data · mThree"],
-                  ["GitHub", "18+ public repos"],
+                  ["GitHub", "20+ original public repos"],
                   ["Based", "Tampa, FL"],
                 ].map(([k, v]) => (
                   <li key={k} className="grid grid-cols-[60px_1fr] gap-4 border-t border-line pt-3">
