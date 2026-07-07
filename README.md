@@ -28,13 +28,14 @@ Editorial "warm paper" design with a physics-based 3D lanyard hero. Launching at
 
 TanStack Start v1 (React 19, file-based routing) · Vite · TypeScript strict ·
 Tailwind v4 · shadcn/ui · GSAP + ScrollTrigger · Three.js / R3F / Rapier ·
-deployed on Cloudflare Workers (nitro) via Lovable.
+builds to Cloudflare Workers (nitro `cloudflare-module` preset), deployable
+with wrangler — no platform lock-in.
 
 ## Development
 
 ```bash
 npm install
-npm run dev        # http://localhost:8080 (port pinned by Lovable config)
+npm run dev        # http://localhost:8080
 npm run build      # production build (Cloudflare Workers output)
 npm test           # vitest — data-invariant tests for projects/site config
 npx tsc --noEmit   # typecheck

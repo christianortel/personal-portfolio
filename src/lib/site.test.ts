@@ -8,7 +8,7 @@ describe("site constants", () => {
     expect(canonical("/about")).toBe("https://christianortel.com/about");
   });
 
-  it("serves the resume from public/ (no Lovable asset URL)", () => {
+  it("serves the resume from public/ (no third-party asset host)", () => {
     expect(RESUME_URL).toBe("/christian-ortel-resume.pdf");
     expect(RESUME_URL).not.toContain("__l5e");
   });
