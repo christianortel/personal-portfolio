@@ -21,8 +21,72 @@ import tallownaiseLogo from "@/assets/logos/tallownaise.png";
 import motionlessLogo from "@/assets/logos/motionless.png";
 import peptipediaLogo from "@/assets/logos/peptipedia.png";
 
+const CERTIFICATIONS = [
+  {
+    name: "Google Data Analytics Professional Certificate",
+    issuer: "Google",
+    when: "Issued Mar 2026",
+    note: "SQL, Python, data cleaning, analysis, visualization, and stakeholder-ready reporting.",
+  },
+  {
+    name: "PCAP - Certified Associate in Python Programming",
+    issuer: "Python Institute",
+    when: "Issued Aug 2025",
+    note: "Python fundamentals, object-oriented programming, control flow, data structures, and application logic.",
+  },
+  {
+    name: "FLA Health and Life and Annuity Agent (0215)",
+    issuer: "Florida Department of Financial Services",
+    when: "Issued Aug 2024 · Expires Aug 2026",
+    note: "Financial-services credential covering health, life, annuity, and variable-contract insurance products.",
+  },
+  {
+    name: "Production Support",
+    issuer: "mThree",
+    when: "Issued Nov 2021",
+    note: "Production support foundations across SQL, MySQL, Git, Kubernetes, Linux, R, and enterprise support workflows.",
+  },
+] as const;
+
 /** Volunteering & community — add entries here and the section renders itself. */
-const VOLUNTEERING: { org: string; role: string; when: string; note: string }[] = [];
+const VOLUNTEERING = [
+  {
+    org: "Chainlink Labs",
+    role: "Blockchain Developer",
+    when: "Oct 2021 - Nov 2021",
+    note: "Hackathon project exploring privacy-preserving medical data ownership: a neural-network concept for CT scan image analysis paired with ERC-based access control so patients could tokenize medical information and control who sees images, answers, and related records.",
+  },
+  {
+    org: "buildspace",
+    role: "Blockchain Developer",
+    when: "Jun 2022 - Aug 2022",
+    note: "Blockchain developer cohort where I built an NFT membership concept around my father's original horror-themed airbrush artwork, translating physical art into collector tiers with signed artwork, merchandise, video calls, and other fan experiences.",
+  },
+  {
+    org: "MegaVolt Corp",
+    role: "Project Intern",
+    when: "Apr 2022 - Jun 2022",
+    note: "Worked with Franky Nines and the MegaVolt team connected to the SupDucks ecosystem, learning how NFT-native brands build community and helping with technical experiments around the MegaToads project.",
+  },
+  {
+    org: "ETHGlobal",
+    role: "Blockchain Developer",
+    when: "Jan 2022",
+    note: "NFT hackathon where we created Greedy Bots on Polygon: randomized robot NFTs that granted access to a locally run arbitrage trading bot designed to route trades across DeFi networks and protocols.",
+  },
+  {
+    org: "Suffolk University Blockchain Club",
+    role: "Blockchain Consultant",
+    when: "Mar 2022 - Present",
+    note: "Advised students and early developers on blockchain learning paths and career opportunities, helping multiple people move into Web3 roles including developers at Koi Network and Mythical Games.",
+  },
+  {
+    org: "University of the Nations, Kona",
+    role: "Mission Builder",
+    when: "May 2021 - Jul 2021",
+    note: "Served as a Christian volunteer with YWAM in Kona, Hawaii, supporting cafeteria operations and helping with group transportation and logistics as a driver.",
+  },
+] as const;
 
 const TIMELINE = [
   {
@@ -51,7 +115,7 @@ const TIMELINE = [
     logo: citiLogo,
     role: "AVP — Data Science Senior Analyst",
     when: "Jan 2023 – Mar 2026",
-    note: "ICRM analytics: Gemini RAG over a 1.5M-row Snowflake dataset (95% AI-SQL accuracy, 80% faster ad-hoc queries), stakeholder reporting automated from 4 weeks to 10 minutes, compliance testing programs in SQL/Python/SAS, cross-border data approvals across 60+ countries.",
+    note: "ICRM analytics: Gemini RAG over a 1.5M-row Snowflake dataset, stakeholder reporting automated from 4 weeks to 10 minutes, compliance testing programs in SQL/Python/SAS, and cross-border data approvals across 60+ countries.",
   },
   {
     co: "Onigiri",
@@ -196,7 +260,10 @@ function AboutPage() {
     <div id="top" className="relative min-h-screen bg-background text-foreground">
       <SiteNav />
 
-      <main id="main" className="page-enter mx-auto max-w-[1400px] px-5 pb-24 pt-32 sm:px-8 sm:pt-40">
+      <main
+        id="main"
+        className="page-enter mx-auto max-w-[1400px] px-5 pb-24 pt-32 sm:px-8 sm:pt-40"
+      >
         <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           <DecryptText text="[ About ]" />
         </p>
@@ -219,31 +286,27 @@ function AboutPage() {
         <div className="mt-14 grid grid-cols-1 gap-12 sm:mt-20 sm:grid-cols-[2fr_1fr] sm:gap-20">
           <div className="space-y-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
             <p>
-              I'm a Senior Data Analyst with experience in financial services,
-              analytics, and automation, focused on turning complex data into
-              practical business solutions. My background covers large enterprise
-              datasets — SQL, Python, Tableau, Power BI, and Excel — in service of
-              reporting, operational performance, risk monitoring, and
+              I'm a Senior Data Analyst with experience in financial services, analytics, and
+              automation, focused on turning complex data into practical business solutions. My
+              background covers large enterprise datasets — SQL, Python, Tableau, Power BI, and
+              Excel — in service of reporting, operational performance, risk monitoring, and
               decision-making.
             </p>
             <p>
-              At Citi I supported risk and compliance stakeholders through
-              dashboard development, reporting automation, data validation, and
-              large-scale analysis inside a centralized analytics function. The
-              work I like best reduces manual effort, improves data quality, and
-              helps teams decide faster: a monthly report that went from four
-              weeks of assembly to ten minutes, and a Gemini RAG workflow that
-              lets 30+ compliance testers query a 1.5M-row Snowflake dataset in
-              plain English.
+              At Citi I supported risk and compliance stakeholders through dashboard development,
+              reporting automation, data validation, and large-scale analysis inside a centralized
+              analytics function. The work I like best reduces manual effort, improves data quality,
+              and helps teams decide faster: a monthly report that went from four weeks of assembly
+              to ten minutes, and a Gemini RAG workflow that lets 30+ compliance testers query a
+              1.5M-row Snowflake dataset in plain English.
             </p>
             <p>
-              I'm especially interested in roles where analytics, automation, and
-              strategy come together. Right now I'm also taking two companies of
-              my own to market: Tallownaise, real mayonnaise made with grass-fed
-              beef tallow, and Motionless Labs, a research-peptide catalog with a
-              verified COA on every batch. The rest of the ledger includes
-              toxinmap, a Rockstar Games sales atlas, resale price trackers,
-              sports-outcome predictors, and a couple of shipped NFT collections.
+              I'm especially interested in roles where analytics, automation, and strategy come
+              together. Right now I'm also taking founder-led projects to market: Tallownaise, real
+              mayonnaise made with grass-fed beef tallow; Motionless Labs, a research-peptide
+              catalog with a verified COA on every batch; and Peptipedia, a separate education
+              layer. The rest of the ledger includes toxinmap, a Rockstar Games sales atlas, resale
+              price trackers, sports-outcome predictors, and shipped NFT projects.
             </p>
           </div>
 
@@ -275,14 +338,18 @@ function AboutPage() {
               <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
                 Certifications
               </h2>
-              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                <li className="border-t border-line pt-3">PCAP — Certified Associate in Python Programming</li>
-                <li className="border-t border-line pt-3">Google Data Analytics Professional Certificate</li>
-                <li className="border-t border-line pt-3">Production Support (SQL, Git, Kubernetes, R) — mThree</li>
-                <li className="border-t border-line pt-3">Dapp University Blockchain Developer Certificate</li>
-                <li className="border-t border-line pt-3">
-                  Licensed MA &amp; NY insurance agent — life, health, travel accident
-                </li>
+              <ul className="mt-4 space-y-3">
+                {CERTIFICATIONS.map((cert) => (
+                  <li key={cert.name} className="border-t border-line pt-3">
+                    <div className="text-sm font-medium text-foreground">{cert.name}</div>
+                    <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">
+                      {cert.issuer} · {cert.when}
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {cert.note}
+                    </p>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -324,12 +391,18 @@ function AboutPage() {
                         />
                       </span>
                     )}
-                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">{t.co}</div>
+                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
+                      {t.co}
+                    </div>
                   </div>
                   <div className="mt-2 text-sm text-muted-foreground">{t.role}</div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">{t.when}</div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
+                    {t.when}
+                  </div>
                 </div>
-                <p className="self-center text-sm leading-relaxed text-muted-foreground sm:text-base">{t.note}</p>
+                <p className="self-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {t.note}
+                </p>
               </li>
             ))}
           </ol>
@@ -349,11 +422,17 @@ function AboutPage() {
                   className="spotlight-card grid grid-cols-1 gap-4 rounded-3xl border border-line bg-card/20 p-6 sm:grid-cols-[1fr_2fr] sm:gap-12 sm:p-8"
                 >
                   <div>
-                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">{v.org}</div>
+                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
+                      {v.org}
+                    </div>
                     <div className="mt-2 text-sm text-muted-foreground">{v.role}</div>
-                    <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">{v.when}</div>
+                    <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
+                      {v.when}
+                    </div>
                   </div>
-                  <p className="self-center text-sm leading-relaxed text-muted-foreground sm:text-base">{v.note}</p>
+                  <p className="self-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    {v.note}
+                  </p>
                 </li>
               ))}
             </ol>

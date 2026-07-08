@@ -6,7 +6,12 @@ import { DecryptText } from "@/components/fx/DecryptText";
 import { spotlightMove } from "@/lib/spotlight";
 import { tiltMove, tiltReset } from "@/lib/tilt";
 import { SITE_URL, ogImage } from "@/lib/site";
-import { FEATURED_PROJECTS, MORE_PROJECTS, REPO_CATEGORIES } from "@/lib/projects";
+import {
+  FEATURED_PROJECTS,
+  MORE_PROJECTS,
+  PROFESSIONAL_CASES,
+  REPO_CATEGORIES,
+} from "@/lib/projects";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -64,24 +69,104 @@ function ProjectsPage() {
     <div id="top" className="relative min-h-screen bg-background text-foreground">
       <SiteNav />
 
-      <main id="main" className="page-enter mx-auto max-w-[1400px] px-5 pb-24 pt-32 sm:px-8 sm:pt-40">
+      <main
+        id="main"
+        className="page-enter mx-auto max-w-[1400px] px-5 pb-24 pt-32 sm:px-8 sm:pt-40"
+      >
         <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           <DecryptText text="[ Work ]" />
         </p>
         <h1 className="font-display text-4xl font-light leading-[1.02] tracking-tight sm:text-7xl">
-          Ventures &
+          Case studies,
           <br />
-          <span className="italic text-signal">everything</span> I've shipped.
+          ventures & <span className="italic text-signal">shipped</span> work.
         </h1>
         <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Up top: the ventures I'm taking to market — Tallownaise, Motionless
-          Labs, Peptipedia, and toxinmap. After them, the side projects with the
-          most moving parts, then the full GitHub catalog by category. The
-          enterprise analytics work lives with my experience and in the resume.
+          First: professional systems where data work changed an operating workflow. Then the
+          ventures I'm taking to market — Tallownaise, Motionless Labs, Peptipedia, and toxinmap —
+          followed by the public GitHub catalog by category.
         </p>
 
+        {/* Professional cases */}
+        <section className="mt-16 sm:mt-20">
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="font-display text-3xl font-light tracking-tight sm:text-5xl">
+                Professional <span className="italic text-signal">systems</span>.
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                The work underneath the resume bullets: reporting automation, applied AI, and
+                stakeholder-facing analytics.
+              </p>
+            </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              Citi · JPMorgan
+            </span>
+          </div>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {PROFESSIONAL_CASES.map((item) => (
+              <article
+                key={item.title}
+                onMouseMove={spotlightMove}
+                className="spotlight-card flex min-h-[420px] flex-col rounded-3xl border border-line bg-card/25 p-6"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-signal">
+                  {item.context}
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-light leading-tight tracking-tight">
+                  {item.title}
+                </h2>
+                <dl className="mt-6 space-y-4 text-sm leading-relaxed">
+                  <div className="border-t border-line pt-4">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                      Problem
+                    </dt>
+                    <dd className="mt-2 text-muted-foreground">{item.problem}</dd>
+                  </div>
+                  <div className="border-t border-line pt-4">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                      Approach
+                    </dt>
+                    <dd className="mt-2 text-muted-foreground">{item.approach}</dd>
+                  </div>
+                  <div className="border-t border-line pt-4">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                      Outcome
+                    </dt>
+                    <dd className="mt-2 text-foreground/85">{item.outcome}</dd>
+                  </div>
+                </dl>
+                <div className="mt-auto flex flex-wrap gap-2 pt-8">
+                  {item.stack.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-line px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         {/* Featured */}
-        <div className="mt-16 space-y-4 sm:mt-20">
+        <section className="mt-24 space-y-4 sm:mt-32">
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="font-display text-3xl font-light tracking-tight sm:text-5xl">
+                Founder work & <span className="italic text-signal">selected builds</span>.
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                Ventures, data products, pricing tools, and public experiments with enough surface
+                area to show the way I build.
+              </p>
+            </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              07 selected
+            </span>
+          </div>
           {FEATURED_PROJECTS.map((p) => (
             <a
               key={p.n}
@@ -92,8 +177,12 @@ function ProjectsPage() {
               className="spotlight-card group relative grid grid-cols-1 gap-6 rounded-3xl border border-line bg-card/30 p-6 backdrop-blur transition-all hover:border-signal/60 hover:bg-card/60 sm:grid-cols-[80px_1fr_auto] sm:gap-10 sm:p-10"
             >
               <div className="flex items-start justify-between sm:flex-col sm:gap-4">
-                <span className="font-mono text-xs uppercase tracking-[0.18em] text-signal">{p.n}</span>
-                <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{p.year}</span>
+                <span className="font-mono text-xs uppercase tracking-[0.18em] text-signal">
+                  {p.n}
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {p.year}
+                </span>
               </div>
               <div className="min-w-0">
                 <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -108,7 +197,9 @@ function ProjectsPage() {
                 <div className="mt-6 grid grid-cols-3 gap-4 sm:max-w-md">
                   {p.metrics.map((m, i) => (
                     <div key={i} className="border-t border-line pt-3">
-                      <div className="font-display text-xl font-light tracking-tight sm:text-2xl">{m.k}</div>
+                      <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
+                        {m.k}
+                      </div>
                       <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                         {m.v}
                       </div>
@@ -139,7 +230,7 @@ function ProjectsPage() {
               </div>
             </a>
           ))}
-        </div>
+        </section>
 
         {/* The shelf */}
         <section className="mt-24 sm:mt-32">
@@ -157,38 +248,42 @@ function ProjectsPage() {
             </a>
           </div>
           {REPO_CATEGORIES.map((cat) => (
-          <div key={cat} className="mb-14">
-          <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
-            <DecryptText text={`[ ${cat} ]`} />
-          </h3>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {MORE_PROJECTS.filter((r) => r.category === cat).map((r) => (
-              <a
-                key={r.name}
-                href={r.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseMove={(e) => {
-                  spotlightMove(e);
-                  tiltMove(e);
-                }}
-                onMouseLeave={tiltReset}
-                className="spotlight-card group flex flex-col justify-between gap-6 rounded-3xl border border-line bg-card/20 p-6 hover:border-signal/60 hover:bg-card/50"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="min-w-0 break-words font-mono text-sm text-foreground/90">{r.name}</h3>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 text-signal transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.blurb}</p>
-                </div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {r.lang}
-                </span>
-              </a>
-            ))}
-          </div>
-          </div>
+            <div key={cat} className="mb-14">
+              <h3 className="mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
+                <DecryptText text={`[ ${cat} ]`} />
+              </h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {MORE_PROJECTS.filter((r) => r.category === cat).map((r) => (
+                  <a
+                    key={r.name}
+                    href={r.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseMove={(e) => {
+                      spotlightMove(e);
+                      tiltMove(e);
+                    }}
+                    onMouseLeave={tiltReset}
+                    className="spotlight-card group flex flex-col justify-between gap-6 rounded-3xl border border-line bg-card/20 p-6 hover:border-signal/60 hover:bg-card/50"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="min-w-0 break-words font-mono text-sm text-foreground/90">
+                          {r.name}
+                        </h3>
+                        <ArrowUpRight className="h-4 w-4 shrink-0 text-signal transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </div>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                        {r.blurb}
+                      </p>
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                      {r.lang}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
           ))}
         </section>
       </main>

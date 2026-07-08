@@ -21,6 +21,15 @@ export interface Project {
   fun?: string;
 }
 
+export interface ProfessionalCase {
+  title: string;
+  context: string;
+  problem: string;
+  approach: string;
+  outcome: string;
+  stack: string[];
+}
+
 export interface RepoProject {
   name: string;
   blurb: string;
@@ -34,6 +43,42 @@ export const REPO_CATEGORIES = [
   "Data & prediction",
   "Web3 & smart contracts",
   "Games & extensions",
+] as const;
+
+export const PROFESSIONAL_CASES: ProfessionalCase[] = [
+  {
+    title: "ICRM stakeholder reporting automation",
+    context: "Citi Bank N.A. · Risk & compliance analytics",
+    problem:
+      "Monthly stakeholder reporting depended on slow manual assembly across Jira sprint data, KPI updates, and operational metrics.",
+    approach:
+      "Built a Python and pandas ETL that extracted, shaped, and packaged the reporting data into a PowerPoint-ready stakeholder workflow.",
+    outcome:
+      "Reduced report assembly from roughly four weeks of manual work to about ten minutes while improving repeatability for ICRM teams.",
+    stack: ["Python", "pandas", "Jira data", "PowerPoint", "KPI reporting"],
+  },
+  {
+    title: "Plain-English SQL workflow over Snowflake",
+    context: "Citi Bank N.A. · Applied AI / RAG",
+    problem:
+      "Compliance testers needed faster ways to explore a large enterprise dataset without waiting on every ad-hoc SQL request.",
+    approach:
+      "Supported a Gemini-based RAG workflow that translated plain-English questions into SQL over a 1.5M-row Snowflake dataset, with prompt testing and stakeholder feedback loops.",
+    outcome:
+      "Helped 30+ compliance testers query risk data more independently while keeping the workflow grounded in enterprise data and review practices.",
+    stack: ["Gemini", "RAG", "Snowflake", "SQL", "prompt testing"],
+  },
+  {
+    title: "Payments production-support reporting",
+    context: "JPMorgan Chase & Co. · via mThree",
+    problem:
+      "Payments stakeholders needed clearer real-time visibility into processing and smoother pre-deployment checks.",
+    approach:
+      "Built Tableau and SQL reporting, then automated a pre-deployment checklist with SQL and Excel VBA for onboarding to payment-processing infrastructure.",
+    outcome:
+      "Improved stakeholder visibility and made release-readiness checks more consistent for payment operations.",
+    stack: ["Tableau", "SQL", "Excel VBA", "payments data", "production support"],
+  },
 ] as const;
 
 export const FEATURED_PROJECTS: Project[] = [
@@ -52,7 +97,7 @@ export const FEATURED_PROJECTS: Project[] = [
     tag: "Venture · CPG",
     href: "https://tallownaise.com",
     image: tallownaiseImg,
-    fun: "The mascot is a highland cow. That part was non-negotiable.",
+    fun: "A food brand built from product thesis to launch stack.",
   },
   {
     n: "02",
@@ -69,7 +114,7 @@ export const FEATURED_PROJECTS: Project[] = [
     tag: "Venture · E-commerce",
     href: "https://motionlesslabs.com",
     image: motionlessImg,
-    fun: "Every vial ships with receipts — literally.",
+    fun: "A private catalog built around documentation, access, and trust.",
   },
   {
     n: "03",
@@ -85,7 +130,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     tag: "Venture · Education",
     href: "https://peptipedia.xyz",
-    fun: "Wikipedia energy, peptide subject matter.",
+    fun: "Research education separated from the commercial catalog.",
   },
   {
     n: "04",
@@ -101,7 +146,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     tag: "Environment · Data viz",
     href: "https://github.com/christianortel/toxinmap",
-    fun: "Find out what's in your backyard. Sorry in advance.",
+    fun: "Environmental data made explorable instead of buried in tables.",
   },
   {
     n: "05",
@@ -117,7 +162,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     tag: "Side project · Analytics",
     href: "https://github.com/christianortel/rockstar-games-sales",
-    fun: "Your GTA childhood, quantified.",
+    fun: "A consumer-friendly analytics surface over a familiar catalog.",
   },
   {
     n: "06",
@@ -133,7 +178,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     tag: "Growth · Marketing",
     href: "https://github.com/christianortel/marketing-analytics-suite",
-    fun: "Finds out which ad dollars are lying to you.",
+    fun: "A planning loop for finding which channels actually perform.",
   },
   {
     n: "07",
@@ -149,7 +194,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     tag: "E-commerce · Pricing",
     href: "https://github.com/christianortel/chromehearts-price-tracker",
-    fun: "Streetwear pricing is chaos. This is its spreadsheet.",
+    fun: "A structured pricing view over a fragmented resale market.",
   },
 ];
 

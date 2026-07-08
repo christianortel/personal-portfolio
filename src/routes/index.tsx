@@ -42,11 +42,7 @@ const PERSON_JSON_LD = {
   email: `mailto:${EMAIL}`,
   telephone: PHONE_INTL,
   url: SITE_URL,
-  sameAs: [
-    GITHUB_URL,
-    "https://www.linkedin.com/in/christianortel",
-    LINK_HUB_URL,
-  ],
+  sameAs: [GITHUB_URL, "https://www.linkedin.com/in/christianortel", LINK_HUB_URL],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Tampa",
@@ -117,7 +113,7 @@ const EXPERIENCE = [
     bullets: [
       "Automated the monthly ICRM stakeholder report with a Python ETL over Jira sprint data and KPIs — turnaround went from 4 weeks of manual work to 10 minutes.",
       "Led deployment of Google Gemini through a custom RAG framework over a 1.5M-row Snowflake consumer dataset — plain-English-to-SQL with up to four joins for 30+ compliance testers.",
-      "Designed and ran A/B prompt tests that raised AI-generated SQL accuracy from 60% to 95%, cutting ad-hoc query turnaround by 80%.",
+      "Designed and ran A/B prompt tests to make generated SQL outputs more reliable for non-technical risk and compliance users.",
       "Implemented data-driven compliance testing and reporting programs with SQL, Python, and SAS in line with the Compliance Testing Plan.",
       "Expanded cross-border data access approvals across 60+ countries; validated UAT and Production Tableau dashboards monthly for risk stakeholders.",
     ],
@@ -189,6 +185,47 @@ const EXPERIENCE = [
     ],
   },
 ];
+
+const PROOF_POINTS = [
+  {
+    value: "4 weeks",
+    label: "to 10 minutes",
+    detail: "Python ETL replaced manual monthly ICRM report assembly.",
+  },
+  {
+    value: "1.5M",
+    label: "Snowflake rows",
+    detail: "Gemini/RAG workflow over enterprise consumer data.",
+  },
+  {
+    value: "30+",
+    label: "compliance testers",
+    detail: "Plain-English SQL exploration for risk stakeholders.",
+  },
+  {
+    value: "60+",
+    label: "countries",
+    detail: "Cross-border data access approvals and validation work.",
+  },
+] as const;
+
+const AI_SYSTEMS = [
+  {
+    title: "Enterprise RAG for risk data",
+    stack: "Gemini · Snowflake · SQL · prompt evaluation",
+    body: "Helped bring a plain-English-to-SQL workflow to compliance testers working across a large Snowflake dataset, with prompt testing and stakeholder feedback loops built into the process.",
+  },
+  {
+    title: "Agentic market-sentiment workflow",
+    stack: "Llama 3.1 · Python RAG · CoinMarketCap API · Twitter API",
+    body: "Built an Onigiri Twitter agent that pulled live market context, generated sentiment commentary, and published through the Twitter API.",
+  },
+  {
+    title: "Open-source AI experiments",
+    stack: "ChatGPT · WhatsApp · Discord voice · custom agents",
+    body: "Maintained a long tail of small AI projects and prototypes, from chat integrations to early prompt-built games and voice-enabled bot experiments.",
+  },
+] as const;
 
 function Index() {
   const root = useRef<HTMLDivElement | null>(null);
@@ -305,470 +342,601 @@ function Index() {
   }, []);
 
   return (
-    <div ref={root} className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div
+      ref={root}
+      className="relative min-h-screen overflow-x-hidden bg-background text-foreground"
+    >
       <SiteNav />
       <main id="main">
-      {/* Hero */}
-      <section id="top" className="relative grain isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pb-14 pt-28 sm:pb-20">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--signal)_10%,transparent),transparent_60%),radial-gradient(ellipse_at_bottom,transparent_30%,var(--background)_85%)]" />
+        {/* Hero */}
+        <section
+          id="top"
+          className="relative grain isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pb-14 pt-28 sm:pb-20"
+        >
+          <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--signal)_10%,transparent),transparent_60%),radial-gradient(ellipse_at_bottom,transparent_30%,var(--background)_85%)]" />
 
-        {/* Lanyard badge — center stage, draggable 3D ID card (client-only, heavy).
+          {/* Lanyard badge — center stage, draggable 3D ID card (client-only, heavy).
             In-flow on small screens so it never covers the headline; raised overlay on lg+.
             Reduced-motion users get a static badge image instead of the physics canvas. */}
-        <div className="pointer-events-none relative z-10 flex h-[44svh] justify-center sm:h-[50svh] lg:absolute lg:inset-x-0 lg:-top-[9svh] lg:h-[62svh]">
-          <div
-            className="pointer-events-auto h-full w-full max-w-[560px] sm:max-w-[720px] lg:max-w-[960px]"
-            style={{ touchAction: "none" }}
-          >
-            {mounted &&
-              (reducedMotion ? (
-                <div className="flex h-full items-start justify-center pt-6 lg:pt-[12svh]">
-                  <img
-                    src={badgePhoto}
-                    alt="Christian Ortel's ID badge — Senior Data Analyst"
-                    width={704}
-                    height={960}
-                    loading="eager"
-                    className="h-[85%] w-auto rounded-2xl object-contain drop-shadow-2xl"
-                  />
-                </div>
-              ) : (
-                <Suspense fallback={null}>
-                  <Lanyard
-                    position={[0, 0, 13]}
-                    gravity={[0, -40, 0]}
-                    fov={20}
-                    frontImage={badgePhoto}
-                    backImage={badgeBack}
-                    imageFit="cover"
-                  />
-                </Suspense>
-              ))}
-          </div>
-        </div>
-
-        <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-8">
-          <div className="mb-8 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground sm:mb-12">
-            <div className="flex min-w-0 flex-col gap-1">
-              <span>[ Senior Data Analyst · AI / Analytics Engineer ]</span>
-              <span className="text-foreground/60">Tampa, FL · open to remote · est. 2019</span>
-            </div>
-            <div className="shrink-0 text-right text-foreground/70">
-              {time && <>TPA · {time}</>}
+          <div className="pointer-events-none relative z-10 flex h-[44svh] justify-center sm:h-[50svh] lg:absolute lg:inset-x-0 lg:-top-[9svh] lg:h-[62svh]">
+            <div
+              className="pointer-events-auto h-full w-full max-w-[560px] sm:max-w-[720px] lg:max-w-[960px]"
+              style={{ touchAction: "none" }}
+            >
+              {mounted &&
+                (reducedMotion ? (
+                  <div className="flex h-full items-start justify-center pt-6 lg:pt-[12svh]">
+                    <img
+                      src={badgePhoto}
+                      alt="Christian Ortel's ID badge — Senior Data Analyst"
+                      width={704}
+                      height={960}
+                      loading="eager"
+                      className="h-[85%] w-auto rounded-2xl object-contain drop-shadow-2xl"
+                    />
+                  </div>
+                ) : (
+                  <Suspense fallback={null}>
+                    <Lanyard
+                      position={[0, 0, 13]}
+                      gravity={[0, -40, 0]}
+                      fov={20}
+                      frontImage={badgePhoto}
+                      backImage={badgeBack}
+                      imageFit="cover"
+                    />
+                  </Suspense>
+                ))}
             </div>
           </div>
 
-          <h1
-            ref={heroTitle}
-            className="mx-auto text-center font-display text-[clamp(2.6rem,8vw,8rem)] font-light leading-[0.92] tracking-[-0.035em]"
-          >
-            {"Data work that".split(" ").map((w, i) => (
-              <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
-                <span data-word className="inline-block">{w}</span>
-              </span>
-            ))}
-            <br />
-            {"ships.".split(" ").map((w, i) => (
-              <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
-                <span data-word className="gradient-text inline-block italic">{w}</span>
-              </span>
-            ))}
-          </h1>
-
-          <div className="mx-auto mt-8 flex max-w-2xl flex-col items-center gap-8 text-center sm:mt-10">
-            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-              I'm Christian — a Senior Data Analyst with a background in
-              financial services, risk, and automation. I build practical things
-              with SQL, Python, AI/RAG, and clean data workflows — from
-              enterprise risk reporting at Citi to a family of ventures
-              heading to market.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Magnetic className="inline-block">
-                <a
-                  href="#experience"
-                  className="group inline-flex items-center gap-3 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
-                >
-                  See the work
-                  <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-                </a>
-              </Magnetic>
-              <Magnetic className="inline-block">
-                <a
-                  href={RESUME_URL}
-                  download={RESUME_FILENAME}
-                  className="group inline-flex items-center gap-3 rounded-full border border-line bg-background/40 px-6 py-3.5 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-signal hover:text-signal"
-                >
-                  Download resume
-                  <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-                </a>
-              </Magnetic>
+          <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-8">
+            <div className="mb-8 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground sm:mb-12">
+              <div className="flex min-w-0 flex-col gap-1">
+                <span>[ Senior Data Analyst · AI / Analytics Engineer ]</span>
+                <span className="text-foreground/60">Tampa, FL · open to remote · est. 2019</span>
+              </div>
+              <div className="shrink-0 text-right text-foreground/70">
+                {time && <>TPA · {time}</>}
+              </div>
             </div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              [ tip · grab the badge & throw it around ]
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Marquee */}
-      <section className="border-y border-line py-6 overflow-hidden">
-        <div className="flex whitespace-nowrap marquee-track font-display text-3xl tracking-tight sm:text-5xl">
-          {Array.from({ length: 2 }).map((_, k) => (
-            <div key={k} className="flex shrink-0 items-center gap-12 pr-12">
-              {[
-                "SQL at scale",
-                "★",
-                "Python automation",
-                "★",
-                "RAG & LLM workflows",
-                "★",
-                "Risk & compliance reporting",
-                "★",
-                "Tableau · Power BI",
-                "★",
-                "Beef-tallow mayonnaise",
-                "★",
-              ].map((t, i) => (
-                <span key={i} className={t === "★" ? "text-signal" : "italic font-light"}>
-                  {t}
+            <h1
+              ref={heroTitle}
+              className="mx-auto text-center font-display text-[clamp(2.6rem,8vw,8rem)] font-light leading-[0.92] tracking-[-0.035em]"
+            >
+              {"Data work that".split(" ").map((w, i) => (
+                <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
+                  <span data-word className="inline-block">
+                    {w}
+                  </span>
                 </span>
               ))}
-            </div>
-          ))}
-        </div>
-      </section>
+              <br />
+              {"ships.".split(" ").map((w, i) => (
+                <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
+                  <span data-word className="gradient-text inline-block italic">
+                    {w}
+                  </span>
+                </span>
+              ))}
+            </h1>
 
-      {/* Experience */}
-      <section id="experience" className="border-t border-line">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
-          <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6">
-            <div className="min-w-0">
-              <p data-fade className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <DecryptText text="[ 01 · Experience ]" />
+            <div className="mx-auto mt-8 flex max-w-2xl flex-col items-center gap-8 text-center sm:mt-10">
+              <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                I'm Christian — a Senior Data Analyst with a background in financial services, risk,
+                and applied AI. I turn messy business questions into usable systems — SQL, Python
+                automations, RAG workflows, dashboards, and products people can actually operate.
               </p>
-              <h2 data-blur className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl">
-                Seven roles,
-                <br />
-                <span className="italic text-signal">one trajectory</span>.
-              </h2>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <Magnetic className="inline-block">
+                  <a
+                    href="#experience"
+                    className="group inline-flex items-center gap-3 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+                  >
+                    See the work
+                    <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                  </a>
+                </Magnetic>
+                <Magnetic className="inline-block">
+                  <a
+                    href={RESUME_URL}
+                    download={RESUME_FILENAME}
+                    className="group inline-flex items-center gap-3 rounded-full border border-line bg-background/40 px-6 py-3.5 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-signal hover:text-signal"
+                  >
+                    Download resume
+                    <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                  </a>
+                </Magnetic>
+              </div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                [ tip · grab the badge & throw it around ]
+              </p>
             </div>
           </div>
+        </section>
 
-          <ol className="space-y-4">
-            {EXPERIENCE.map((r) => (
-              <li
-                key={r.co + r.when}
-                data-row
-                onMouseMove={spotlightMove}
-                className="spotlight-card grid grid-cols-1 gap-6 rounded-3xl border border-line bg-card/20 p-6 sm:grid-cols-[1fr_2fr] sm:gap-12 sm:p-10"
+        {/* Proof strip */}
+        <section className="border-y border-line bg-card/20">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-1 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
+            {PROOF_POINTS.map((p) => (
+              <div
+                key={p.value + p.label}
+                className="border-line py-6 sm:px-6 sm:[&:not(:first-child)]:border-l"
               >
-                <div>
-                  <div className="flex items-center gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-white shadow-sm">
-                      <img
-                        src={r.logo}
-                        alt={`${r.co} logo`}
-                        width={32}
-                        height={32}
-                        loading="lazy"
-                        className="h-8 w-8 object-contain"
-                      />
-                    </span>
-                    <div className="font-display text-2xl font-light tracking-tight sm:text-3xl">
-                      {r.co}
+                <div className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
+                  {p.value}
+                </div>
+                <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
+                  {p.label}
+                </div>
+                <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                  {p.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Marquee */}
+        <section className="border-y border-line py-6 overflow-hidden">
+          <div className="flex whitespace-nowrap marquee-track font-display text-3xl tracking-tight sm:text-5xl">
+            {Array.from({ length: 2 }).map((_, k) => (
+              <div key={k} className="flex shrink-0 items-center gap-12 pr-12">
+                {[
+                  "SQL at scale",
+                  "★",
+                  "Python automation",
+                  "★",
+                  "RAG & LLM workflows",
+                  "★",
+                  "Risk & compliance reporting",
+                  "★",
+                  "Tableau · Power BI",
+                  "★",
+                  "Beef-tallow mayonnaise",
+                  "★",
+                ].map((t, i) => (
+                  <span key={i} className={t === "★" ? "text-signal" : "italic font-light"}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section id="experience" className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+            <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6">
+              <div className="min-w-0">
+                <p
+                  data-fade
+                  className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+                >
+                  <DecryptText text="[ 01 · Experience ]" />
+                </p>
+                <h2
+                  data-blur
+                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl"
+                >
+                  Seven roles,
+                  <br />
+                  <span className="italic text-signal">one trajectory</span>.
+                </h2>
+              </div>
+            </div>
+
+            <ol className="space-y-4">
+              {EXPERIENCE.map((r) => (
+                <li
+                  key={r.co + r.when}
+                  data-row
+                  onMouseMove={spotlightMove}
+                  className="spotlight-card grid grid-cols-1 gap-6 rounded-3xl border border-line bg-card/20 p-6 sm:grid-cols-[1fr_2fr] sm:gap-12 sm:p-10"
+                >
+                  <div>
+                    <div className="flex items-center gap-4">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-white shadow-sm">
+                        <img
+                          src={r.logo}
+                          alt={`${r.co} logo`}
+                          width={32}
+                          height={32}
+                          loading="lazy"
+                          className="h-8 w-8 object-contain"
+                        />
+                      </span>
+                      <div className="font-display text-2xl font-light tracking-tight sm:text-3xl">
+                        {r.co}
+                      </div>
+                    </div>
+                    <div className="mt-3 text-sm text-muted-foreground">{r.role}</div>
+                    <div className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {r.where}
+                    </div>
+                    <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
+                      {r.when}
                     </div>
                   </div>
-                  <div className="mt-3 text-sm text-muted-foreground">{r.role}</div>
-                  <div className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    {r.where}
+                  <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    {r.bullets.map((b, i) => (
+                      <li key={i} className="border-t border-line pt-3">
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Work */}
+        <section id="work" className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+            <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6 sm:mb-24">
+              <div className="min-w-0">
+                <p
+                  data-fade
+                  className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+                >
+                  <DecryptText text="[ 02 · Selected work ]" />
+                </p>
+                <h2
+                  data-blur
+                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl"
+                >
+                  Ventures &
+                  <br />
+                  <span className="italic text-signal">shipped</span> builds.
+                </h2>
+              </div>
+              <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                07 / 26
+              </span>
+            </div>
+
+            <div className="space-y-4">
+              {FEATURED_PROJECTS.map((p) => (
+                <a
+                  key={p.n}
+                  href={p.href}
+                  target={p.href.startsWith("http") ? "_blank" : undefined}
+                  rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  data-row
+                  onMouseMove={spotlightMove}
+                  className="spotlight-card group relative grid grid-cols-1 gap-6 rounded-3xl border border-line bg-card/30 p-6 backdrop-blur transition-all hover:border-signal/60 hover:bg-card/60 sm:grid-cols-[80px_1fr_auto] sm:gap-10 sm:p-10"
+                >
+                  <div className="flex items-start justify-between sm:flex-col sm:gap-4">
+                    <span className="font-mono text-xs uppercase tracking-[0.18em] text-signal">
+                      {p.n}
+                    </span>
+                    <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                      {p.year}
+                    </span>
                   </div>
-                  <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
-                    {r.when}
+                  <div className="min-w-0">
+                    <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {p.client} · {p.tag}
+                    </div>
+                    <h3 className="font-display text-2xl font-light leading-tight tracking-tight sm:text-4xl">
+                      {p.title}
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      {p.blurb}
+                    </p>
+                    <div className="mt-6 grid grid-cols-3 gap-4 sm:max-w-md">
+                      {p.metrics.map((m, i) => (
+                        <div key={i} className="border-t border-line pt-3">
+                          <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
+                            {m.k}
+                          </div>
+                          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                            {m.v}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {p.fun && (
+                      <p className="mt-6 font-display text-lg font-light italic text-signal">
+                        <span className="mr-2 not-italic">★</span>
+                        {p.fun}
+                      </p>
+                    )}
                   </div>
+                  <div className="flex flex-col items-end gap-6">
+                    {p.image && (
+                      <img
+                        src={p.image}
+                        alt={`${p.client} artwork`}
+                        width={640}
+                        height={400}
+                        loading="lazy"
+                        className="hidden aspect-[16/10] w-56 rounded-2xl border border-line object-cover shadow-md transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-[1.04] sm:block lg:w-72"
+                      />
+                    )}
+                    <span className="mt-auto grid h-12 w-12 shrink-0 place-items-center rounded-full border border-line transition-all group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Stack */}
+        <section id="stack" className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-[1fr_2fr] sm:gap-20">
+              <div>
+                <p
+                  data-fade
+                  className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+                >
+                  <DecryptText text="[ 03 · Toolkit ]" />
+                </p>
+                <h2
+                  data-blur
+                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl"
+                >
+                  The tools I
+                  <br />
+                  <span className="italic text-signal">reach for</span>.
+                </h2>
+                <p
+                  data-fade
+                  className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground"
+                >
+                  Warehouse SQL and pragmatic Python first, with a steadily growing AI / RAG layer
+                  on top. BI tools where the audience lives.
+                </p>
+              </div>
+              <div className="space-y-6">
+                {STACK.map(([name, detail], i) => {
+                  const fill = [0.96, 0.92, 0.82, 0.88, 0.72, 0.9][i] ?? 0.8;
+                  return (
+                    <div key={name} data-fade className="border-t border-line pt-5">
+                      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
+                        <div className="min-w-0">
+                          <div className="font-display text-2xl font-light tracking-tight sm:text-3xl">
+                            {name}
+                          </div>
+                          <div className="mt-1 text-sm text-muted-foreground">{detail}</div>
+                        </div>
+                        <div className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                          {String(i + 1).padStart(2, "0")}
+                        </div>
+                      </div>
+                      <div className="mt-4 h-px w-full bg-line">
+                        <div
+                          data-bar={fill}
+                          className="h-px origin-left bg-signal"
+                          style={{ transform: "scaleX(0)" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Applied AI */}
+        <section id="ai" className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-[1fr_2fr] sm:gap-20">
+              <div>
+                <p
+                  data-fade
+                  className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+                >
+                  <DecryptText text="[ 04 · Applied AI ]" />
+                </p>
+                <h2
+                  data-blur
+                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl"
+                >
+                  AI work that
+                  <br />
+                  <span className="italic text-signal">connects to data</span>.
+                </h2>
+                <p
+                  data-fade
+                  className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground"
+                >
+                  My strongest AI work is not chatbot theater. It sits next to databases, APIs,
+                  evaluation loops, and business users who need cleaner answers faster.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                {AI_SYSTEMS.map((system) => (
+                  <article
+                    key={system.title}
+                    data-fade
+                    onMouseMove={spotlightMove}
+                    className="spotlight-card flex min-h-[280px] flex-col justify-between rounded-3xl border border-line bg-card/25 p-6"
+                  >
+                    <div>
+                      <div className="font-display text-2xl font-light leading-tight tracking-tight">
+                        {system.title}
+                      </div>
+                      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                        {system.body}
+                      </p>
+                    </div>
+                    <div className="mt-8 border-t border-line pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">
+                      {system.stack}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About */}
+        <section id="about" className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+            <p
+              data-fade
+              className="mb-12 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              <DecryptText text="[ 05 · About ]" />
+            </p>
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-[2fr_1fr] sm:gap-20">
+              <div className="space-y-8">
+                <p
+                  data-fade
+                  className="font-display text-2xl font-light leading-[1.35] tracking-tight sm:text-4xl"
+                >
+                  I work where{" "}
+                  <span className="italic text-signal">analytics, AI, and business operations</span>{" "}
+                  meet — turning warehouse data and LLM tooling into things stakeholders can
+                  actually use.
+                </p>
+                <p
+                  data-fade
+                  className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+                >
+                  Most recently AVP, Data Science Senior Analyst at Citi (ICRM), with prior stops at
+                  JPMorgan Chase (payments production support, via mThree), iDecentralize Finance
+                  (smart contracts + LLM agents), WorldStar HipHop, and TD Bank. BS in Big Data
+                  &amp; Business Analytics, concentration in Cybersecurity, from Suffolk University
+                  — Dean's List, Trustee Scholarship, Transfer Excellence Award. Right now I'm
+                  taking my own ventures to market —{" "}
+                  <span className="italic text-foreground">Tallownaise</span>, real mayo made with
+                  grass-fed beef tallow;{" "}
+                  <span className="italic text-foreground">Motionless Labs</span>, a
+                  research-peptide catalog with a verified COA on every batch; and{" "}
+                  <span className="italic text-foreground">Peptipedia</span>, its plain-language
+                  education arm — on top of a shelf of shipped side projects like toxinmap.
+                </p>
+                <div data-fade className="flex flex-wrap items-center gap-4">
+                  <a
+                    href="/resume"
+                    className="group inline-flex items-center gap-3 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
+                  >
+                    View full resume
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                  <a
+                    href={RESUME_URL}
+                    download={RESUME_FILENAME}
+                    className="text-sm font-medium underline decoration-signal decoration-2 underline-offset-[6px] transition-colors hover:text-signal"
+                  >
+                    Download PDF
+                  </a>
                 </div>
-                <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  {r.bullets.map((b, i) => (
-                    <li key={i} className="border-t border-line pt-3">
-                      {b}
+              </div>
+              <div className="space-y-8">
+                <img
+                  data-fade
+                  src={portrait}
+                  alt="Christian Ortel — professional headshot"
+                  width={800}
+                  height={800}
+                  loading="lazy"
+                  className="aspect-square w-full max-w-[300px] rounded-3xl border border-line object-cover shadow-lg"
+                />
+                <ul
+                  data-fade
+                  className="space-y-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground"
+                >
+                  {[
+                    [
+                      "Now",
+                      "Launching Tallownaise, Motionless Labs & Peptipedia · open to data roles",
+                    ],
+                    ["Prev", "Citi · JPMorgan · WorldStar · iDeFi"],
+                    ["Edu", "Suffolk · BS Big Data & Analytics"],
+                    ["Certs", "Python PCAP · Google Data · mThree · FL 0215"],
+                    ["GitHub", "20+ original public repos"],
+                    ["Based", "Tampa, FL"],
+                  ].map(([k, v]) => (
+                    <li
+                      key={k}
+                      className="grid grid-cols-[60px_1fr] gap-4 border-t border-line pt-3"
+                    >
+                      <span className="text-signal">{k}</span>
+                      <span className="text-foreground/80 normal-case tracking-normal">{v}</span>
                     </li>
                   ))}
                 </ul>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Work */}
-      <section id="work" className="border-t border-line">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
-          <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6 sm:mb-24">
-            <div className="min-w-0">
-              <p data-fade className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <DecryptText text="[ 02 · Selected work ]" />
-              </p>
-              <h2 data-blur className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl">
-                Four ventures &
-                <br />
-                <span className="italic text-signal">shipped</span> side projects.
-              </h2>
-            </div>
-            <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              07 / 26
-            </span>
-          </div>
-
-          <div className="space-y-4">
-            {FEATURED_PROJECTS.map((p) => (
-              <a
-                key={p.n}
-                href={p.href}
-                target={p.href.startsWith("http") ? "_blank" : undefined}
-                rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                data-row
-                onMouseMove={spotlightMove}
-                className="spotlight-card group relative grid grid-cols-1 gap-6 rounded-3xl border border-line bg-card/30 p-6 backdrop-blur transition-all hover:border-signal/60 hover:bg-card/60 sm:grid-cols-[80px_1fr_auto] sm:gap-10 sm:p-10"
-              >
-                <div className="flex items-start justify-between sm:flex-col sm:gap-4">
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-signal">
-                    {p.n}
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    {p.year}
-                  </span>
-                </div>
-                <div className="min-w-0">
-                  <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    {p.client} · {p.tag}
-                  </div>
-                  <h3 className="font-display text-2xl font-light leading-tight tracking-tight sm:text-4xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                    {p.blurb}
-                  </p>
-                  <div className="mt-6 grid grid-cols-3 gap-4 sm:max-w-md">
-                    {p.metrics.map((m, i) => (
-                      <div key={i} className="border-t border-line pt-3">
-                        <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
-                          {m.k}
-                        </div>
-                        <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                          {m.v}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  {p.fun && (
-                    <p className="mt-6 font-display text-lg font-light italic text-signal">
-                      <span className="mr-2 not-italic">★</span>
-                      {p.fun}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col items-end gap-6">
-                  {p.image && (
-                    <img
-                      src={p.image}
-                      alt={`${p.client} artwork`}
-                      width={640}
-                      height={400}
-                      loading="lazy"
-                      className="hidden aspect-[16/10] w-56 rounded-2xl border border-line object-cover shadow-md transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-[1.04] sm:block lg:w-72"
-                    />
-                  )}
-                  <span className="mt-auto grid h-12 w-12 shrink-0 place-items-center rounded-full border border-line transition-all group-hover:border-signal group-hover:bg-signal group-hover:text-ink">
-                    <ArrowUpRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stack */}
-      <section id="stack" className="border-t border-line">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-[1fr_2fr] sm:gap-20">
-            <div>
-              <p data-fade className="mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <DecryptText text="[ 03 · Toolkit ]" />
-              </p>
-              <h2 data-blur className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl">
-                The tools I
-                <br />
-                <span className="italic text-signal">reach for</span>.
-              </h2>
-              <p data-fade className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Warehouse SQL and pragmatic Python first, with a steadily growing
-                AI / RAG layer on top. BI tools where the audience lives.
-              </p>
-            </div>
-            <div className="space-y-6">
-              {STACK.map(([name, detail], i) => {
-                const fill = [0.96, 0.92, 0.82, 0.88, 0.72, 0.9][i] ?? 0.8;
-                return (
-                  <div key={name} data-fade className="border-t border-line pt-5">
-                    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
-                      <div className="min-w-0">
-                        <div className="font-display text-2xl font-light tracking-tight sm:text-3xl">
-                          {name}
-                        </div>
-                        <div className="mt-1 text-sm text-muted-foreground">{detail}</div>
-                      </div>
-                      <div className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                        {String(i + 1).padStart(2, "0")}
-                      </div>
-                    </div>
-                    <div className="mt-4 h-px w-full bg-line">
-                      <div
-                        data-bar={fill}
-                        className="h-px origin-left bg-signal"
-                        style={{ transform: "scaleX(0)" }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="border-t border-line">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
-          <p data-fade className="mb-12 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            <DecryptText text="[ 04 · About ]" />
-          </p>
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-[2fr_1fr] sm:gap-20">
-            <div className="space-y-8">
-              <p data-fade className="font-display text-2xl font-light leading-[1.35] tracking-tight sm:text-4xl">
-                I work in the seam between <span className="italic text-signal">analytics, AI, and the business</span> — turning warehouse data and LLM tooling into things stakeholders can actually use.
-              </p>
-              <p data-fade className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Most recently AVP, Data Science Senior Analyst at Citi (ICRM), with
-                prior stops at JPMorgan Chase (payments production support, via
-                mThree), iDecentralize Finance (smart contracts + LLM agents),
-                WorldStar HipHop, and TD Bank. BS in Big Data &amp; Business Analytics,
-                concentration in Cybersecurity, from Suffolk University — Dean's List,
-                Trustee Scholarship, Transfer Excellence Award. Right now I'm
-                taking my own ventures to market — <span className="italic text-foreground">Tallownaise</span>,
-                real mayo made with grass-fed beef tallow;{" "}
-                <span className="italic text-foreground">Motionless Labs</span>, a
-                research-peptide catalog with a verified COA on every batch; and{" "}
-                <span className="italic text-foreground">Peptipedia</span>, its
-                plain-language education arm — on top of a shelf of shipped side
-                projects like toxinmap.
-              </p>
-              <div data-fade className="flex flex-wrap items-center gap-4">
-                <a
-                  href="/resume"
-                  className="group inline-flex items-center gap-3 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-ink transition-transform hover:scale-[1.02]"
-                >
-                  View full resume
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-                <a
-                  href={RESUME_URL}
-                  download={RESUME_FILENAME}
-                  className="text-sm font-medium underline decoration-signal decoration-2 underline-offset-[6px] transition-colors hover:text-signal"
-                >
-                  Download PDF
-                </a>
               </div>
             </div>
-            <div className="space-y-8">
-              <img
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="border-t border-line">
+          <div className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-40">
+            <p
+              data-fade
+              className="mb-10 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              <DecryptText text="[ 06 · Let's talk ]" />
+            </p>
+            <h2
+              data-blur
+              className="font-display text-[clamp(2.4rem,8vw,7.5rem)] font-light leading-[0.95] tracking-[-0.03em]"
+            >
+              Got a data
+              <br />
+              <span className="italic text-signal">problem</span> worth solving?
+              <span className="caret" />
+            </h2>
+            <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-[1.2fr_1fr] sm:gap-16">
+              <div data-fade>
+                <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+                  Open to senior analyst, analytics engineering, and applied-AI roles — full-time or
+                  contract. Send the question, the constraint, and anything you've already tried.
+                </p>
+                <Magnetic className="inline-block" strength={0.2}>
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="mt-8 inline-flex items-center gap-3 font-display text-2xl font-light tracking-tight underline decoration-signal decoration-2 underline-offset-8 transition-colors hover:text-signal sm:text-4xl"
+                  >
+                    {EMAIL}
+                    <ArrowUpRight className="h-6 w-6 sm:h-8 sm:w-8" />
+                  </a>
+                </Magnetic>
+                <div className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  or call · {PHONE}
+                </div>
+              </div>
+              <ul
                 data-fade
-                src={portrait}
-                alt="Christian Ortel — professional headshot"
-                width={800}
-                height={800}
-                loading="lazy"
-                className="aspect-square w-full max-w-[300px] rounded-3xl border border-line object-cover shadow-lg"
-              />
-              <ul data-fade className="space-y-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                className="space-y-4 self-end font-mono text-xs uppercase tracking-[0.18em]"
+              >
                 {[
-                  ["Now", "Launching Tallownaise, Motionless Labs & Peptipedia · open to data roles"],
-                  ["Prev", "Citi · JPMorgan · WorldStar · iDeFi"],
-                  ["Edu", "Suffolk · BS Big Data & Analytics"],
-                  ["Certs", "Python PCAP · Google Data · mThree"],
-                  ["GitHub", "20+ original public repos"],
-                  ["Based", "Tampa, FL"],
-                ].map(([k, v]) => (
-                  <li key={k} className="grid grid-cols-[60px_1fr] gap-4 border-t border-line pt-3">
-                    <span className="text-signal">{k}</span>
-                    <span className="text-foreground/80 normal-case tracking-normal">{v}</span>
+                  ["GitHub", "@christianortel", GITHUB_URL],
+                  ["LinkedIn", "in/christianortel", LINKEDIN_URL],
+                  ["Website", "christianortel.com", SITE_URL],
+                  ["Email", EMAIL, `mailto:${EMAIL}`],
+                ].map(([k, v, href]) => (
+                  <li key={k}>
+                    <a
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="grid grid-cols-[100px_minmax(0,1fr)_auto] items-center gap-4 border-t border-line pt-4 transition-colors hover:text-signal"
+                    >
+                      <span className="text-muted-foreground">{k}</span>
+                      <span className="truncate text-foreground/90 normal-case tracking-normal">
+                        {v}
+                      </span>
+                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-signal" />
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="border-t border-line">
-        <div className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-40">
-          <p data-fade className="mb-10 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            <DecryptText text="[ 05 · Let's talk ]" />
-          </p>
-          <h2
-            data-blur
-            className="font-display text-[clamp(2.4rem,8vw,7.5rem)] font-light leading-[0.95] tracking-[-0.03em]"
-          >
-            Got a data
-            <br />
-            <span className="italic text-signal">problem</span> worth solving?
-            <span className="caret" />
-          </h2>
-          <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-[1.2fr_1fr] sm:gap-16">
-            <div data-fade>
-              <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-                Open to senior analyst, analytics engineering, and applied-AI
-                roles — full-time or contract. Send the question, the constraint,
-                and anything you've already tried.
-              </p>
-              <Magnetic className="inline-block" strength={0.2}>
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="mt-8 inline-flex items-center gap-3 font-display text-2xl font-light tracking-tight underline decoration-signal decoration-2 underline-offset-8 transition-colors hover:text-signal sm:text-4xl"
-                >
-                  {EMAIL}
-                  <ArrowUpRight className="h-6 w-6 sm:h-8 sm:w-8" />
-                </a>
-              </Magnetic>
-              <div className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                or call · {PHONE}
-              </div>
-            </div>
-            <ul data-fade className="space-y-4 self-end font-mono text-xs uppercase tracking-[0.18em]">
-              {[
-                ["GitHub", "@christianortel", GITHUB_URL],
-                ["LinkedIn", "in/christianortel", LINKEDIN_URL],
-                ["Website", "christianortel.com", SITE_URL],
-                ["Email", EMAIL, `mailto:${EMAIL}`],
-              ].map(([k, v, href]) => (
-                <li key={k}>
-                  <a
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="grid grid-cols-[100px_minmax(0,1fr)_auto] items-center gap-4 border-t border-line pt-4 transition-colors hover:text-signal"
-                  >
-                    <span className="text-muted-foreground">{k}</span>
-                    <span className="truncate text-foreground/90 normal-case tracking-normal">{v}</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-signal" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
       </main>
 
       <SiteFooter />

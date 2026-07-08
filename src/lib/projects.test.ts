@@ -1,5 +1,19 @@
 import { describe, expect, it } from "vitest";
-import { FEATURED_PROJECTS, MORE_PROJECTS, REPO_CATEGORIES } from "./projects";
+import { FEATURED_PROJECTS, MORE_PROJECTS, PROFESSIONAL_CASES, REPO_CATEGORIES } from "./projects";
+
+describe("PROFESSIONAL_CASES", () => {
+  it("has complete case-study fields with stack tags", () => {
+    expect(PROFESSIONAL_CASES.length).toBeGreaterThanOrEqual(3);
+    for (const item of PROFESSIONAL_CASES) {
+      expect(item.title).toBeTruthy();
+      expect(item.context).toBeTruthy();
+      expect(item.problem).toBeTruthy();
+      expect(item.approach).toBeTruthy();
+      expect(item.outcome).toBeTruthy();
+      expect(item.stack.length).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
 
 describe("FEATURED_PROJECTS", () => {
   it("numbers cards sequentially from 01 with no duplicates", () => {

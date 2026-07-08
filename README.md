@@ -16,8 +16,9 @@ Editorial "warm paper" design with a physics-based 3D lanyard hero. Launching at
   gradient text, staggered mobile menu. All GSAP/CSS, no extra deps, all
   `prefers-reduced-motion` aware.
 - **⌘K command palette** (cmdk) — jump to pages, copy email, download resume.
-- **Real content** — experience with quantified outcomes (Citi ICRM RAG: 60%→95%
-  AI-SQL accuracy), four ventures ([Tallownaise](https://tallownaise.com),
+- **Real content** — quantified professional outcomes (Citi reporting automation:
+  4 weeks to 10 minutes; Gemini/RAG over a 1.5M-row Snowflake dataset), four
+  ventures ([Tallownaise](https://tallownaise.com),
   [Motionless Labs](https://motionlesslabs.com), Peptipedia, toxinmap), and the
   full original-repo catalog grouped by category (AI & LLM, data & prediction,
   Web3, games & extensions).
