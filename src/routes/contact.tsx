@@ -11,7 +11,7 @@ import {
   SITE_URL,
   GITHUB_URL,
   LINKEDIN_URL,
-  LINKTREE_URL,
+  LINK_HUB_URL,
   RESUME_URL,
   RESUME_FILENAME,
   ogImage,
@@ -142,7 +142,7 @@ function ContactPage() {
             {[
               ["GitHub", "@christianortel", GITHUB_URL],
               ["LinkedIn", "in/christianortel", LINKEDIN_URL],
-              ["Linktree", "christianortel", LINKTREE_URL],
+              ["hoo.be", "christianortel", LINK_HUB_URL],
               ["Website", "christianortel.com", SITE_URL],
             ].map(([k, v, href]) => (
               <li key={k}>

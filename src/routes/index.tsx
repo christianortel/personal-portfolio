@@ -26,7 +26,7 @@ import {
   PHONE_INTL,
   GITHUB_URL,
   LINKEDIN_URL,
-  LINKTREE_URL,
+  LINK_HUB_URL,
   RESUME_URL,
   RESUME_FILENAME,
   ogImage,
@@ -45,7 +45,7 @@ const PERSON_JSON_LD = {
   sameAs: [
     GITHUB_URL,
     "https://www.linkedin.com/in/christianortel",
-    LINKTREE_URL,
+    LINK_HUB_URL,
   ],
   address: {
     "@type": "PostalAddress",
