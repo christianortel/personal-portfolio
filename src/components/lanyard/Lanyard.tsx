@@ -13,7 +13,9 @@ import {
 } from "@react-three/rapier";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
-import cardGLB from "./card.glb";
+// Served from public/ so the binary asset works identically in dev and the
+// Cloudflare Workers build without vite assetsInclude configuration.
+const cardGLB = "/card.glb";
 import lanyard from "./lanyard.png";
 
 import * as THREE from "three";

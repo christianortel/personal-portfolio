@@ -15,6 +15,5 @@ export default defineConfig({
     nitro({ preset: "cloudflare-module" }),
     viteReact(),
   ],
-  assetsInclude: ["**/*.glb"],
   server: { port: 8080 },
 });
