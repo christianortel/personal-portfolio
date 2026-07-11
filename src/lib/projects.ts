@@ -5,6 +5,7 @@ export interface ProjectMetric {
 
 import tallownaiseImg from "@/assets/projects/tallownaise-site.png";
 import motionlessImg from "@/assets/projects/motionless-site.png";
+import peptipediaImg from "@/assets/projects/peptipedia-site.png";
 
 export interface Project {
   n: string;
@@ -130,6 +131,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     tag: "Venture · Education",
     href: "https://peptipedia.xyz",
+    image: peptipediaImg,
     fun: "Research education separated from the commercial catalog.",
   },
   {
