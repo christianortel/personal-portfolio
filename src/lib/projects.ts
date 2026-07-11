@@ -3,8 +3,8 @@ export interface ProjectMetric {
   v: string;
 }
 
-import tallownaiseImg from "@/assets/projects/tallownaise.jpg";
-import motionlessImg from "@/assets/projects/motionless.jpg";
+import tallownaiseImg from "@/assets/projects/tallownaise-site.png";
+import motionlessImg from "@/assets/projects/motionless-site.png";
 
 export interface Project {
   n: string;
