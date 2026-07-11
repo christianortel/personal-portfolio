@@ -1,14 +1,13 @@
 # christianortel.com — Personal Portfolio
 
 Portfolio of **Christian Ortel** — Senior Data Analyst & AI/Analytics Engineer (Tampa, FL).
-Editorial "warm paper" design with a physics-based 3D lanyard hero. Launching at
+Editorial "warm paper" design with a fast, responsive portfolio ID hero. Live at
 [christianortel.com](https://christianortel.com).
 
 ## Highlights
 
-- **3D lanyard hero** — draggable ID badge on a rope (Three.js + Rapier physics via
-  `@react-three/fiber`), photo front, QR-coded back that scans to the site.
-  Draco-free WebP-texture GLB (2.4 MB → 257 KB).
+- **Recruiter-first hero** — an immediately rendered portfolio ID, concise positioning,
+  verified impact highlights, and direct routes to work and the downloadable resume.
 - **Two themes** — warm cream/ink/amber light (default) + graphite dark, persisted
   toggle, no flash-of-wrong-theme.
 - **ReactBits-style effects, hand-rolled** — decrypted/scramble text, blur-in
@@ -16,11 +15,11 @@ Editorial "warm paper" design with a physics-based 3D lanyard hero. Launching at
   gradient text, staggered mobile menu. All GSAP/CSS, no extra deps, all
   `prefers-reduced-motion` aware.
 - **⌘K command palette** (cmdk) — jump to pages, copy email, download resume.
-- **Real content** — quantified professional outcomes (Citi reporting automation:
+- **Real content** — specific professional outcomes (Citi reporting automation:
   4 weeks to 10 minutes; Gemini/RAG over a 1.5M-row Snowflake dataset), four
   ventures ([Tallownaise](https://tallownaise.com),
   [Motionless Labs](https://motionlesslabs.com), Peptipedia, toxinmap), and the
-  full original-repo catalog grouped by category (AI & LLM, data & prediction,
+  public GitHub catalog grouped by category (AI & LLM, data & prediction,
   Web3, games & extensions).
 - **SEO/a11y** — per-route meta + canonical + branded OG images, JSON-LD
   (Person/WebSite/Breadcrumb), sitemap + robots, skip link, focus rings.
@@ -28,7 +27,7 @@ Editorial "warm paper" design with a physics-based 3D lanyard hero. Launching at
 ## Stack
 
 TanStack Start v1 (React 19, file-based routing) · Vite · TypeScript strict ·
-Tailwind v4 · shadcn/ui · GSAP + ScrollTrigger · Three.js / R3F / Rapier ·
+Tailwind v4 · shadcn/ui · GSAP + ScrollTrigger ·
 builds to Cloudflare Workers (nitro `cloudflare-module` preset), deployable
 with wrangler — no platform lock-in.
 
@@ -48,4 +47,4 @@ effects in `src/components/fx/`.
 
 ---
 
-Built by Christian Ortel with Claude Code.
+Designed and built by Christian Ortel.

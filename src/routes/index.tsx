@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import badgeBack from "@/assets/badge-back.jpg";
 import badgePhoto from "@/assets/badge-front-photo.jpg";
 import portrait from "@/assets/portrait.jpg";
 import citiLogo from "@/assets/logos/citi.png";
@@ -32,8 +31,6 @@ import {
   ogImage,
 } from "@/lib/site";
 
-const Lanyard = lazy(() => import("@/components/lanyard/Lanyard"));
-
 const PERSON_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -50,6 +47,20 @@ const PERSON_JSON_LD = {
     addressCountry: "US",
   },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Suffolk University" },
+  hasCredential: [
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "Google Data Analytics Professional Certificate",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "PCAP - Certified Associate in Python Programming",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "Florida 2-15 Life, Health, and Annuity Agent License",
+    },
+  ],
   knowsAbout: [
     "SQL",
     "Python",
@@ -112,10 +123,10 @@ const EXPERIENCE = [
     when: "Jan 2023 – Mar 2026",
     bullets: [
       "Automated the monthly ICRM stakeholder report with a Python ETL over Jira sprint data and KPIs — turnaround went from 4 weeks of manual work to 10 minutes.",
-      "Led deployment of Google Gemini through a custom RAG framework over a 1.5M-row Snowflake consumer dataset — plain-English-to-SQL with up to four joins for 30+ compliance testers.",
+      "Led deployment of Google Gemini through a custom RAG framework over a 1.5M-row Snowflake consumer dataset — plain-English-to-SQL with up to four joins for risk and compliance teams.",
       "Designed and ran A/B prompt tests to make generated SQL outputs more reliable for non-technical risk and compliance users.",
       "Implemented data-driven compliance testing and reporting programs with SQL, Python, and SAS in line with the Compliance Testing Plan.",
-      "Expanded cross-border data access approvals across 60+ countries; validated UAT and Production Tableau dashboards monthly for risk stakeholders.",
+      "Supported cross-border data access approvals and validated UAT and Production Tableau dashboards monthly for risk stakeholders.",
     ],
   },
   {
@@ -127,7 +138,7 @@ const EXPERIENCE = [
     bullets: [
       "Deployed a Llama 3.1-powered Twitter agent on a custom Python RAG framework.",
       "Integrated the CoinMarketCap API to post real-time market-sentiment analysis via the Twitter API.",
-      "Tokenized the project's $ONIGIRI coin — $500K+ market cap in its first month.",
+      "Packaged the workflow as an on-chain project with a public community and token utility.",
     ],
   },
   {
@@ -198,14 +209,14 @@ const PROOF_POINTS = [
     detail: "Gemini/RAG workflow over enterprise consumer data.",
   },
   {
-    value: "30+",
-    label: "compliance testers",
-    detail: "Plain-English SQL exploration for risk stakeholders.",
+    value: "Risk data",
+    label: "compliance analytics",
+    detail: "Enterprise reporting, validation, and stakeholder workflows.",
   },
   {
-    value: "60+",
-    label: "countries",
-    detail: "Cross-border data access approvals and validation work.",
+    value: "Applied AI",
+    label: "data systems",
+    detail: "RAG, APIs, prompt evaluation, and human review loops.",
   },
 ] as const;
 
@@ -220,21 +231,13 @@ const AI_SYSTEMS = [
     stack: "Llama 3.1 · Python RAG · CoinMarketCap API · Twitter API",
     body: "Built an Onigiri Twitter agent that pulled live market context, generated sentiment commentary, and published through the Twitter API.",
   },
-  {
-    title: "Open-source AI experiments",
-    stack: "ChatGPT · WhatsApp · Discord voice · custom agents",
-    body: "Maintained a long tail of small AI projects and prototypes, from chat integrations to early prompt-built games and voice-enabled bot experiments.",
-  },
 ] as const;
 
 function Index() {
   const root = useRef<HTMLDivElement | null>(null);
-  const heroTitle = useRef<HTMLHeadingElement | null>(null);
   const [time, setTime] = useState("");
-  const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   useEffect(() => {
-    setMounted(true);
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
@@ -260,23 +263,6 @@ function Index() {
           el.style.transform = `scaleX(${el.dataset.bar ?? "1"})`;
         });
         return;
-      }
-
-      if (heroTitle.current) {
-        const words = heroTitle.current.querySelectorAll<HTMLElement>("[data-word]");
-        gsap.fromTo(
-          words,
-          { yPercent: 110, opacity: 0, filter: "blur(8px)" },
-          {
-            yPercent: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 1.1,
-            ease: "expo.out",
-            stagger: 0.06,
-            delay: 0.1,
-          },
-        );
       }
 
       // ReactBits-style BlurText for section headings
@@ -355,38 +341,20 @@ function Index() {
         >
           <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--signal)_10%,transparent),transparent_60%),radial-gradient(ellipse_at_bottom,transparent_30%,var(--background)_85%)]" />
 
-          {/* Lanyard badge — center stage, draggable 3D ID card (client-only, heavy).
-            In-flow on small screens so it never covers the headline; raised overlay on lg+.
-            Reduced-motion users get a static badge image instead of the physics canvas. */}
-          <div className="pointer-events-none relative z-10 flex h-[44svh] justify-center sm:h-[50svh] lg:absolute lg:inset-x-0 lg:-top-[9svh] lg:h-[62svh]">
-            <div
-              className="pointer-events-auto h-full w-full max-w-[560px] sm:max-w-[720px] lg:max-w-[960px]"
-              style={{ touchAction: "none" }}
-            >
-              {mounted &&
-                (reducedMotion ? (
-                  <div className="flex h-full items-start justify-center pt-6 lg:pt-[12svh]">
-                    <img
-                      src={badgePhoto}
-                      alt="Christian Ortel's ID badge — Senior Data Analyst"
-                      width={704}
-                      height={960}
-                      loading="eager"
-                      className="h-[85%] w-auto rounded-2xl object-contain drop-shadow-2xl"
-                    />
-                  </div>
-                ) : (
-                  <Suspense fallback={null}>
-                    <Lanyard
-                      position={[0, 0, 13]}
-                      gravity={[0, -40, 0]}
-                      fov={20}
-                      frontImage={badgePhoto}
-                      backImage={badgeBack}
-                      imageFit="cover"
-                    />
-                  </Suspense>
-                ))}
+          {/* Static ID keeps the first viewport fast, legible, and reliable on every device. */}
+          <div className="pointer-events-none relative z-10 flex h-[44svh] justify-center sm:h-[50svh] xl:absolute xl:right-6 xl:top-16 xl:h-[52svh] xl:w-[21rem]">
+            <div className="relative h-full w-full max-w-[560px] sm:max-w-[720px] xl:max-w-none">
+              <div className="flex h-full items-start justify-center pt-6 xl:pt-2">
+                <img
+                  src={badgePhoto}
+                  alt="Christian Ortel's ID badge — Senior Data Analyst"
+                  width={704}
+                  height={960}
+                  loading="eager"
+                  decoding="async"
+                  className="h-[85%] w-auto rounded-2xl object-contain drop-shadow-2xl xl:h-[92%]"
+                />
+              </div>
             </div>
           </div>
 
@@ -401,23 +369,16 @@ function Index() {
               </div>
             </div>
 
-            <h1
-              ref={heroTitle}
-              className="mx-auto text-center font-display text-[clamp(2.6rem,8vw,8rem)] font-light leading-[0.92] tracking-[-0.035em]"
-            >
+            <h1 className="mx-auto text-center font-display text-[clamp(2.6rem,8vw,8rem)] font-light leading-[0.92]">
               {"Data work that".split(" ").map((w, i) => (
                 <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
-                  <span data-word className="inline-block">
-                    {w}
-                  </span>
+                  <span className="inline-block">{w}</span>
                 </span>
               ))}
               <br />
               {"ships.".split(" ").map((w, i) => (
                 <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
-                  <span data-word className="gradient-text inline-block italic">
-                    {w}
-                  </span>
+                  <span className="gradient-text inline-block italic">{w}</span>
                 </span>
               ))}
             </h1>
@@ -450,7 +411,7 @@ function Index() {
                 </Magnetic>
               </div>
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                [ tip · grab the badge & throw it around ]
+                [ portfolio ID ]
               </p>
             </div>
           </div>
@@ -464,7 +425,7 @@ function Index() {
                 key={p.value + p.label}
                 className="border-line py-6 sm:px-6 sm:[&:not(:first-child)]:border-l"
               >
-                <div className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
+                <div className="font-display text-4xl font-light text-foreground sm:text-5xl">
                   {p.value}
                 </div>
                 <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
@@ -480,7 +441,7 @@ function Index() {
 
         {/* Marquee */}
         <section className="border-y border-line py-6 overflow-hidden">
-          <div className="flex whitespace-nowrap marquee-track font-display text-3xl tracking-tight sm:text-5xl">
+          <div className="flex whitespace-nowrap marquee-track font-display text-3xl sm:text-5xl">
             {Array.from({ length: 2 }).map((_, k) => (
               <div key={k} className="flex shrink-0 items-center gap-12 pr-12">
                 {[
@@ -507,7 +468,7 @@ function Index() {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="border-t border-line">
+        <section id="experience" className="scroll-mt-24 border-t border-line">
           <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
             <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-6">
               <div className="min-w-0">
@@ -519,7 +480,7 @@ function Index() {
                 </p>
                 <h2
                   data-blur
-                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl"
+                  className="font-display text-4xl font-light leading-[1.05] sm:text-6xl"
                 >
                   Seven roles,
                   <br />
@@ -548,9 +509,7 @@ function Index() {
                           className="h-8 w-8 object-contain"
                         />
                       </span>
-                      <div className="font-display text-2xl font-light tracking-tight sm:text-3xl">
-                        {r.co}
-                      </div>
+                      <div className="font-display text-2xl font-light sm:text-3xl">{r.co}</div>
                     </div>
                     <div className="mt-3 text-sm text-muted-foreground">{r.role}</div>
                     <div className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -586,7 +545,7 @@ function Index() {
                 </p>
                 <h2
                   data-blur
-                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-6xl"
+                  className="font-display text-4xl font-light leading-[1.05] sm:text-6xl"
                 >
                   Ventures &
                   <br />
@@ -621,7 +580,7 @@ function Index() {
                     <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                       {p.client} · {p.tag}
                     </div>
-                    <h3 className="font-display text-2xl font-light leading-tight tracking-tight sm:text-4xl">
+                    <h3 className="font-display text-2xl font-light leading-tight sm:text-4xl">
                       {p.title}
                     </h3>
                     <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -630,9 +589,7 @@ function Index() {
                     <div className="mt-6 grid grid-cols-3 gap-4 sm:max-w-md">
                       {p.metrics.map((m, i) => (
                         <div key={i} className="border-t border-line pt-3">
-                          <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
-                            {m.k}
-                          </div>
+                          <div className="font-display text-xl font-light sm:text-2xl">{m.k}</div>
                           <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                             {m.v}
                           </div>
@@ -680,7 +637,7 @@ function Index() {
                 </p>
                 <h2
                   data-blur
-                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl"
+                  className="font-display text-4xl font-light leading-[1.05] sm:text-5xl"
                 >
                   The tools I
                   <br />
@@ -701,9 +658,7 @@ function Index() {
                     <div key={name} data-fade className="border-t border-line pt-5">
                       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4">
                         <div className="min-w-0">
-                          <div className="font-display text-2xl font-light tracking-tight sm:text-3xl">
-                            {name}
-                          </div>
+                          <div className="font-display text-2xl font-light sm:text-3xl">{name}</div>
                           <div className="mt-1 text-sm text-muted-foreground">{detail}</div>
                         </div>
                         <div className="shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -738,7 +693,7 @@ function Index() {
                 </p>
                 <h2
                   data-blur
-                  className="font-display text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl"
+                  className="font-display text-4xl font-light leading-[1.05] sm:text-5xl"
                 >
                   AI work that
                   <br />
@@ -748,11 +703,11 @@ function Index() {
                   data-fade
                   className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground"
                 >
-                  My strongest AI work is not chatbot theater. It sits next to databases, APIs,
-                  evaluation loops, and business users who need cleaner answers faster.
+                  Useful AI belongs beside databases, APIs, evaluation loops, and business users who
+                  need cleaner answers faster.
                 </p>
               </div>
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {AI_SYSTEMS.map((system) => (
                   <article
                     key={system.title}
@@ -761,7 +716,7 @@ function Index() {
                     className="spotlight-card flex min-h-[280px] flex-col justify-between rounded-3xl border border-line bg-card/25 p-6"
                   >
                     <div>
-                      <div className="font-display text-2xl font-light leading-tight tracking-tight">
+                      <div className="font-display text-2xl font-light leading-tight">
                         {system.title}
                       </div>
                       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
@@ -791,7 +746,7 @@ function Index() {
               <div className="space-y-8">
                 <p
                   data-fade
-                  className="font-display text-2xl font-light leading-[1.35] tracking-tight sm:text-4xl"
+                  className="font-display text-2xl font-light leading-[1.35] sm:text-4xl"
                 >
                   I work where{" "}
                   <span className="italic text-signal">analytics, AI, and business operations</span>{" "}
@@ -882,7 +837,7 @@ function Index() {
             </p>
             <h2
               data-blur
-              className="font-display text-[clamp(2.4rem,8vw,7.5rem)] font-light leading-[0.95] tracking-[-0.03em]"
+              className="font-display text-[clamp(2.4rem,8vw,7.5rem)] font-light leading-[0.95]"
             >
               Got a data
               <br />
@@ -898,7 +853,7 @@ function Index() {
                 <Magnetic className="inline-block" strength={0.2}>
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="mt-8 inline-flex items-center gap-3 font-display text-2xl font-light tracking-tight underline decoration-signal decoration-2 underline-offset-8 transition-colors hover:text-signal sm:text-4xl"
+                    className="mt-8 inline-flex items-center gap-3 font-display text-2xl font-light underline decoration-signal decoration-2 underline-offset-8 transition-colors hover:text-signal sm:text-4xl"
                   >
                     {EMAIL}
                     <ArrowUpRight className="h-6 w-6 sm:h-8 sm:w-8" />

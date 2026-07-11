@@ -65,7 +65,7 @@ export const PROFESSIONAL_CASES: ProfessionalCase[] = [
     approach:
       "Supported a Gemini-based RAG workflow that translated plain-English questions into SQL over a 1.5M-row Snowflake dataset, with prompt testing and stakeholder feedback loops.",
     outcome:
-      "Helped 30+ compliance testers query risk data more independently while keeping the workflow grounded in enterprise data and review practices.",
+      "Helped compliance testers query risk data more independently while keeping the workflow grounded in enterprise data and review practices.",
     stack: ["Gemini", "RAG", "Snowflake", "SQL", "prompt testing"],
   },
   {
@@ -318,7 +318,8 @@ export const MORE_PROJECTS: RepoProject[] = [
   },
   {
     name: "personal-portfolio",
-    blurb: "This site — TanStack Start, React 19, GSAP, and a physics-based 3D lanyard.",
+    blurb:
+      "This site — a responsive TanStack Start and React 19 portfolio with accessible navigation, restrained GSAP motion, structured project data, and recruiter-ready case studies.",
     lang: "TypeScript",
     href: "https://github.com/christianortel/personal-portfolio",
     category: "Games & extensions",

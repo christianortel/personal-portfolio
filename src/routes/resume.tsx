@@ -10,7 +10,8 @@ export const Route = createFileRoute("/resume")({
       { title: "Resume — Christian Ortel" },
       {
         name: "description",
-        content: "Download or view Christian Ortel's resume — Senior Data Analyst & AI/Analytics Engineer.",
+        content:
+          "Download or view Christian Ortel's resume — Senior Data Analyst & AI/Analytics Engineer.",
       },
       { property: "og:title", content: "Resume — Christian Ortel" },
       {
@@ -76,9 +77,7 @@ function ResumePage() {
       <main id="main" className="page-enter mx-auto max-w-[1400px] px-5 py-8 sm:px-8 sm:py-12">
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="font-display text-3xl font-light tracking-tight sm:text-4xl">
-              Resume
-            </h1>
+            <h1 className="font-display text-3xl font-light sm:text-4xl">Resume</h1>
             <p className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
               Christian Ortel · Senior Data Analyst & AI/Analytics Engineer
             </p>
@@ -88,15 +87,13 @@ function ResumePage() {
         <div className="overflow-hidden rounded-2xl border border-line bg-card/30 shadow-2xl">
           <div className="relative aspect-[8.5/11] w-full sm:aspect-auto sm:h-[calc(100vh-260px)]">
             <iframe
-              src={RESUME_URL}
+              src={`${RESUME_URL}?v=2026-07-11`}
               title="Christian Ortel resume"
               className="absolute inset-0 h-full w-full"
             />
             {/* Fallback for browsers / mobile that can't render the PDF inline */}
             <div className="absolute inset-0 -z-10 flex flex-col items-center justify-center p-8 text-center">
-              <p className="text-muted-foreground">
-                Your browser can't preview the PDF inline.
-              </p>
+              <p className="text-muted-foreground">Your browser can't preview the PDF inline.</p>
               <a
                 href={RESUME_URL}
                 download={FILENAME}
@@ -111,7 +108,7 @@ function ResumePage() {
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            Last updated: June 2026
+            Last updated: July 2026
           </p>
           <a
             href={RESUME_URL}

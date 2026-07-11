@@ -115,14 +115,14 @@ const TIMELINE = [
     logo: citiLogo,
     role: "AVP — Data Science Senior Analyst",
     when: "Jan 2023 – Mar 2026",
-    note: "ICRM analytics: Gemini RAG over a 1.5M-row Snowflake dataset, stakeholder reporting automated from 4 weeks to 10 minutes, compliance testing programs in SQL/Python/SAS, and cross-border data approvals across 60+ countries.",
+    note: "ICRM analytics: Gemini RAG over a 1.5M-row Snowflake dataset, stakeholder reporting automated from 4 weeks to 10 minutes, compliance testing programs in SQL/Python/SAS, and cross-border data approvals.",
   },
   {
     co: "Onigiri",
     logo: onigiriLogo,
     role: "AI Engineer — side venture",
     when: "Oct 2024 – Jan 2025",
-    note: "Llama 3.1 Twitter agent on a custom Python RAG framework posting CoinMarketCap-driven market sentiment; the project's $ONIGIRI token reached a $500K+ market cap in its first month.",
+    note: "Llama 3.1 Twitter agent on a custom Python RAG framework posting CoinMarketCap-driven market sentiment and packaged as an on-chain community project.",
   },
   {
     co: "JPMorgan Chase & Co.",
@@ -268,7 +268,7 @@ function AboutPage() {
           <DecryptText text="[ About ]" />
         </p>
         <div className="grid grid-cols-1 items-end gap-10 sm:grid-cols-[minmax(0,1fr)_auto]">
-          <h1 className="font-display text-4xl font-light leading-[1.02] tracking-tight sm:text-7xl">
+          <h1 className="font-display text-4xl font-light leading-[1.02] sm:text-7xl">
             Analyst by trade,
             <br />
             <span className="italic text-signal">builder</span> by habit.
@@ -297,7 +297,7 @@ function AboutPage() {
               reporting automation, data validation, and large-scale analysis inside a centralized
               analytics function. The work I like best reduces manual effort, improves data quality,
               and helps teams decide faster: a monthly report that went from four weeks of assembly
-              to ten minutes, and a Gemini RAG workflow that lets 30+ compliance testers query a
+              to ten minutes, and a Gemini RAG workflow that lets compliance testers query a
               1.5M-row Snowflake dataset in plain English.
             </p>
             <p>
@@ -391,9 +391,7 @@ function AboutPage() {
                         />
                       </span>
                     )}
-                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
-                      {t.co}
-                    </div>
+                    <div className="font-display text-xl font-light sm:text-2xl">{t.co}</div>
                   </div>
                   <div className="mt-2 text-sm text-muted-foreground">{t.role}</div>
                   <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
@@ -422,9 +420,7 @@ function AboutPage() {
                   className="spotlight-card grid grid-cols-1 gap-4 rounded-3xl border border-line bg-card/20 p-6 sm:grid-cols-[1fr_2fr] sm:gap-12 sm:p-8"
                 >
                   <div>
-                    <div className="font-display text-xl font-light tracking-tight sm:text-2xl">
-                      {v.org}
-                    </div>
+                    <div className="font-display text-xl font-light sm:text-2xl">{v.org}</div>
                     <div className="mt-2 text-sm text-muted-foreground">{v.role}</div>
                     <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-signal">
                       {v.when}
