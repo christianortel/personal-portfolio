@@ -1,13 +1,13 @@
 # christianortel.com — Personal Portfolio
 
 Portfolio of **Christian Ortel** — Senior Data Analyst & AI/Analytics Engineer (Tampa, FL).
-Editorial "warm paper" design with a fast, responsive portfolio ID hero. Live at
+Editorial "warm paper" design with an interactive 3D portfolio ID hero. Live at
 [christianortel.com](https://christianortel.com).
 
 ## Highlights
 
-- **Recruiter-first hero** — an immediately rendered portfolio ID, concise positioning,
-  verified impact highlights, and direct routes to work and the downloadable resume.
+- **Progressively enhanced 3D lanyard** — a draggable React Three Fiber and Rapier ID
+  badge with an immediate static fallback for loading, reduced motion, or WebGL errors.
 - **Two themes** — warm cream/ink/amber light (default) + graphite dark, persisted
   toggle, no flash-of-wrong-theme.
 - **ReactBits-style effects, hand-rolled** — decrypted/scramble text, blur-in
@@ -27,7 +27,7 @@ Editorial "warm paper" design with a fast, responsive portfolio ID hero. Live at
 ## Stack
 
 TanStack Start v1 (React 19, file-based routing) · Vite · TypeScript strict ·
-Tailwind v4 · shadcn/ui · GSAP + ScrollTrigger ·
+Tailwind v4 · shadcn/ui · GSAP + ScrollTrigger · Three.js / R3F / Rapier ·
 builds to Cloudflare Workers (nitro `cloudflare-module` preset), deployable
 with wrangler — no platform lock-in.
 

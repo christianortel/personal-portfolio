@@ -319,7 +319,7 @@ export const MORE_PROJECTS: RepoProject[] = [
   {
     name: "personal-portfolio",
     blurb:
-      "This site — a responsive TanStack Start and React 19 portfolio with accessible navigation, restrained GSAP motion, structured project data, and recruiter-ready case studies.",
+      "This site — a responsive TanStack Start and React 19 portfolio with an interactive React Three Fiber lanyard, accessible navigation, and recruiter-ready case studies.",
     lang: "TypeScript",
     href: "https://github.com/christianortel/personal-portfolio",
     category: "Games & extensions",

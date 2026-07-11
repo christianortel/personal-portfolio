@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import badgePhoto from "@/assets/badge-front-photo.jpg";
+import badgeBack from "@/assets/badge-back.jpg";
 import portrait from "@/assets/portrait.jpg";
 import citiLogo from "@/assets/logos/citi.png";
 import onigiriLogo from "@/assets/logos/onigiri.png";
@@ -15,6 +16,7 @@ import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { FEATURED_PROJECTS } from "@/lib/projects";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { LanyardErrorBoundary } from "@/components/LanyardErrorBoundary";
 import { DecryptText } from "@/components/fx/DecryptText";
 import { Magnetic } from "@/components/fx/Magnetic";
 import { spotlightMove } from "@/lib/spotlight";
@@ -30,6 +32,8 @@ import {
   RESUME_FILENAME,
   ogImage,
 } from "@/lib/site";
+
+const Lanyard = lazy(() => import("@/components/lanyard/Lanyard"));
 
 const PERSON_JSON_LD = {
   "@context": "https://schema.org",
@@ -233,11 +237,29 @@ const AI_SYSTEMS = [
   },
 ] as const;
 
+function StaticBadge() {
+  return (
+    <div className="flex h-full items-start justify-center pt-6 lg:pt-[12svh]">
+      <img
+        src={badgePhoto}
+        alt="Christian Ortel's ID badge — Senior Data Analyst"
+        width={704}
+        height={960}
+        loading="eager"
+        decoding="async"
+        className="h-[85%] w-auto rounded-2xl object-contain drop-shadow-2xl"
+      />
+    </div>
+  );
+}
+
 function Index() {
   const root = useRef<HTMLDivElement | null>(null);
   const [time, setTime] = useState("");
+  const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   useEffect(() => {
+    setMounted(true);
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
@@ -341,20 +363,28 @@ function Index() {
         >
           <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--signal)_10%,transparent),transparent_60%),radial-gradient(ellipse_at_bottom,transparent_30%,var(--background)_85%)]" />
 
-          {/* Static ID keeps the first viewport fast, legible, and reliable on every device. */}
-          <div className="pointer-events-none relative z-10 flex h-[44svh] justify-center sm:h-[50svh] xl:absolute xl:right-6 xl:top-16 xl:h-[52svh] xl:w-[21rem]">
-            <div className="relative h-full w-full max-w-[560px] sm:max-w-[720px] xl:max-w-none">
-              <div className="flex h-full items-start justify-center pt-6 xl:pt-2">
-                <img
-                  src={badgePhoto}
-                  alt="Christian Ortel's ID badge — Senior Data Analyst"
-                  width={704}
-                  height={960}
-                  loading="eager"
-                  decoding="async"
-                  className="h-[85%] w-auto rounded-2xl object-contain drop-shadow-2xl xl:h-[92%]"
-                />
-              </div>
+          {/* The static badge is the SSR, loading, reduced-motion, and WebGL-error fallback. */}
+          <div className="pointer-events-none relative z-10 flex h-[44svh] justify-center sm:h-[50svh] lg:absolute lg:inset-x-0 lg:-top-[9svh] lg:h-[62svh]">
+            <div
+              className="pointer-events-auto h-full w-full max-w-[560px] sm:max-w-[720px] lg:max-w-[960px]"
+              style={{ touchAction: "none" }}
+            >
+              {mounted && !reducedMotion ? (
+                <LanyardErrorBoundary fallback={<StaticBadge />}>
+                  <Suspense fallback={<StaticBadge />}>
+                    <Lanyard
+                      position={[0, 0, 13]}
+                      gravity={[0, -40, 0]}
+                      fov={20}
+                      frontImage={badgePhoto}
+                      backImage={badgeBack}
+                      imageFit="cover"
+                    />
+                  </Suspense>
+                </LanyardErrorBoundary>
+              ) : (
+                <StaticBadge />
+              )}
             </div>
           </div>
 
