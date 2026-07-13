@@ -1,0 +1,21 @@
+{
+  "name": "Christian Ortel - Portfolio",
+  "short_name": "C. Ortel",
+  "description": "Senior Data Analyst and AI / Analytics Engineer portfolio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#081426",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

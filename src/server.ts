@@ -2,12 +2,45 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { contentSecurityPolicy, SECURITY_HEADERS } from "./lib/security";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
+
+function createNonce() {
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  return btoa(String.fromCharCode(...bytes));
+}
+
+async function withSecurityHeaders(response: Response, request: Request): Promise<Response> {
+  const headers = new Headers(response.headers);
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+    if (!headers.has(name)) headers.set(name, value);
+  }
+
+  const isHtml = headers.get("content-type")?.includes("text/html") ?? false;
+  const nonce = isHtml ? createNonce() : undefined;
+  headers.set("content-security-policy", contentSecurityPolicy(nonce));
+
+  // HSTS is meaningful only on HTTPS and avoids surprising local development hosts.
+  if (new URL(request.url).protocol === "https") {
+    headers.set("strict-transport-security", "max-age=31536000; includeSubDomains");
+  }
+
+  const init = {
+    headers,
+    status: response.status,
+    statusText: response.statusText,
+  };
+
+  if (!nonce) return new Response(response.body, init);
+
+  const html = await response.text();
+  return new Response(html.replace(/<script(?=[\s>])/gi, `<script nonce="${nonce}"`), init);
+}
 
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
@@ -42,13 +75,16 @@ export default {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return await withSecurityHeaders(await normalizeCatastrophicSsrResponse(response), request);
     } catch (error) {
       console.error(error);
-      return new Response(renderErrorPage(), {
-        status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
-      });
+      return await withSecurityHeaders(
+        new Response(renderErrorPage(), {
+          status: 500,
+          headers: { "content-type": "text/html; charset=utf-8" },
+        }),
+        request,
+      );
     }
   },
 };

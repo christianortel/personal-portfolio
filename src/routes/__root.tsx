@@ -20,12 +20,11 @@ function NotFoundComponent() {
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
           [ 404 · signal lost ]
         </p>
-        <h1 className="mt-6 font-display text-[clamp(4rem,18vw,10rem)] font-light leading-none tracking-tight">
+        <h1 className="mt-6 font-display text-[clamp(4rem,18vw,10rem)] font-light leading-none">
           4<span className="italic text-signal">0</span>4
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          This page doesn't exist, was moved, or never shipped.
-          The data says: go home.
+          This page doesn't exist, was moved, or never shipped. The data says: go home.
         </p>
         <div className="mt-8">
           <Link
@@ -47,9 +46,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
+        <h1 className="text-xl font-semibold text-foreground">This page didn't load</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
@@ -81,6 +78,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "author", content: SITE_NAME },
+      { name: "copyright", content: `Copyright 2026 ${SITE_NAME}. All rights reserved.` },
+      { name: "robots", content: "index, follow, noai, noimageai" },
       { name: "theme-color", content: "#f4efe6" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: SITE_NAME },
@@ -88,9 +87,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "96x96" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

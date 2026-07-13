@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  build: { sourcemap: false },
   plugins: [
     tsConfigPaths(),
     tailwindcss(),
